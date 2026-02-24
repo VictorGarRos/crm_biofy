@@ -38,7 +38,8 @@ export default function LoginPage() {
 
             <div className="w-full max-w-md bg-white rounded-[2rem] shadow-xl border border-slate-100 p-8 md:p-12 z-10 relative">
                 <div className="text-center mb-10">
-                    <h1 className="text-4xl font-bold tracking-tight text-slate-900 mb-2">BIOFY</h1>
+                    <img src="/logo.png" alt="Culligan Biofy" className="h-16 mx-auto mb-6 object-contain" />
+                    <h1 className="text-4xl font-bold tracking-tight text-slate-900 mb-2">Acceso a dashboard</h1>
                     <p className="text-slate-500">Bienvenido de nuevo, por favor inicia sesión.</p>
                     {error && (
                         <div className="mt-4 p-3 bg-red-50 border border-red-100 rounded-xl text-red-500 text-sm font-medium">

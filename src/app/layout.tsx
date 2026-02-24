@@ -7,8 +7,8 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "BIOFY Sales Dashboard",
-  description: "Advanced analytics for sales monitoring",
+  title: "Dashboard Culligan Biofy",
+  description: "Consulta de estadísticas de ventas",
 };
 
 export default function RootLayout({

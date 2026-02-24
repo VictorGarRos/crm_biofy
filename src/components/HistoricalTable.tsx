@@ -13,29 +13,26 @@ const data = [
 
 export function HistoricalTable() {
     return (
-        <div className="glass-card overflow-hidden">
-            <div className="p-6 border-b border-border">
-                <h3 className="text-lg font-semibold text-white">Histórico Últimos 8 Días Laborales</h3>
-            </div>
+        <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden p-2">
             <div className="overflow-x-auto">
-                <table className="w-full text-left">
+                <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="bg-secondary/50">
-                            <th className="px-6 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Fecha</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Entregados</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Confirmados</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Demos</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-center">Ventas</th>
+                        <tr>
+                            <th className="px-8 py-6 text-xs font-bold text-slate-700 uppercase tracking-widest border-b border-slate-200">Fecha</th>
+                            <th className="px-8 py-6 text-xs font-bold text-slate-700 uppercase tracking-widest text-center border-b border-slate-200">Entregados</th>
+                            <th className="px-8 py-6 text-xs font-bold text-slate-700 uppercase tracking-widest text-center border-b border-slate-200">Confirmados</th>
+                            <th className="px-8 py-6 text-xs font-bold text-slate-700 uppercase tracking-widest text-center border-b border-slate-200">Demos</th>
+                            <th className="px-8 py-6 text-xs font-bold text-slate-700 uppercase tracking-widest text-center border-b border-slate-200">Ventas</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-border">
+                    <tbody>
                         {data.map((row, idx) => (
-                            <tr key={idx} className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-4 text-sm font-medium text-white">{row.date}</td>
-                                <td className="px-6 py-4 text-sm text-center text-zinc-300">{row.entregados}</td>
-                                <td className="px-6 py-4 text-sm text-center text-zinc-300">{row.confirmados}</td>
-                                <td className="px-6 py-4 text-sm text-center text-zinc-300">{row.demos}</td>
-                                <td className="px-6 py-4 text-sm text-center font-bold text-primary">{row.ventas}</td>
+                            <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
+                                <td className="px-8 py-5 text-sm font-medium text-slate-400 border-b border-slate-100 group-last:border-0">{row.date}</td>
+                                <td className="px-8 py-5 text-sm text-center font-medium text-slate-300 border-b border-slate-100 group-last:border-0">{row.entregados}</td>
+                                <td className="px-8 py-5 text-sm text-center font-medium text-slate-300 border-b border-slate-100 group-last:border-0">{row.confirmados}</td>
+                                <td className="px-8 py-5 text-sm text-center font-medium text-slate-300 border-b border-slate-100 group-last:border-0">{row.demos}</td>
+                                <td className="px-8 py-5 text-sm text-center font-bold text-[#a78bfa] border-b border-slate-100 group-last:border-0">{row.ventas}</td>
                             </tr>
                         ))}
                     </tbody>

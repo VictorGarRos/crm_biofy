@@ -14,11 +14,14 @@ interface CRMData {
     filters?: {
         comerciales: string[];
         tipos: string[];
+        cuentas: string[];
     };
     raw: {
         eventos: string[];
         pedidos: string[];
+        usuarios?: { login: string; nombre: string; tipo: string; rawRow: string; cells: string[] }[];
     };
+    lastUpdate?: string;
 }
 
 export function useCRMData() {
@@ -38,42 +41,41 @@ export function useCRMData() {
                 // Parse metrics from raw data
                 const eventos = jsonData.eventos || [];
                 const pedidos = jsonData.pedidos || [];
+                const usuarios = jsonData.usuarios || [];
 
-                // Simple keyword counting based on valid mapping
-                // DATOS ENTREGADOS = BUSCAR EN EVENTOS (INSTALACION + ENTREGA)
-                const entregados = eventos.filter((r: string) => r.includes('INSTALACION') || r.includes('ENTREGA')).length;
+                // DATOS ENTREGADOS = Todos los eventos asignados
+                const entregados = eventos.length;
 
-                // DEMOS REALIZADAS = BUSCAR EN EVENTOS (VISITA)
-                const demos = eventos.filter((r: string) => r.includes('VISITA')).length;
-
-                // CONFIRMADOS = BUSCAR EN EVENTOS (Checking for a 'CONFIRMADO' or positive status in events)
-                // If not found, fallback to Pedidos 'CONFIRMADO' if logic is ambiguous, but user said Eventos.
-                // Looking at sample data, Eventos row 12 has "PENDIENTE", "NULO". 
-                // Maybe "CONFIRMADO" exists? I'll count it if present.
+                // CONFIRMADOS = Eventos con estado CONFIRMADO
                 const confirmados = eventos.filter((r: string) => r.includes('CONFIRMADO')).length;
 
-                // VENTAS CERRADAS = PEDIDOS (CERRADO + CONFIRMADO in Pedidos?)
-                // User said "VENTAS CERRADAS = PEDIDOS".
-                // In Pedidos we saw "CERRADO COMERCIAL", "CONFIRMADO".
-                const ventas = pedidos.filter((r: string) => r.includes('CERRADO') || r.includes('CONFIRMADO')).length;
+                // DEMOS REALIZADAS = Eventos con estado COMPLETADO
+                const demos = eventos.filter((r: string) => r.includes('COMPLETADO')).length;
 
-                // Parse unique filters
-                const uniqueComerciales = new Set<string>();
+                // VENTAS CERRADAS = Total de pedidos (excluyendo cabeceras y mantenimientos)
+                const realPedidos = pedidos.filter((r: string) => {
+                    const row = r.trim().toUpperCase();
+                    if (!row || row.startsWith('PEDIDO') || row.includes('IMP.INGRE')) return false;
+                    // Exclude maintenance orders
+                    if (row.includes('MANT.') || row.includes('MANTENIMIENTO')) return false;
+                    return true;
+                });
+                const ventas = realPedidos.length;
+
+                // Filter Comercial Dropdown directly from the extracted Users table
+                const validTypes = ['COMERCIAL', 'TECNICO'];
+                const comercialesList = usuarios
+                    .filter((u: any) => validTypes.includes(u.tipo.toUpperCase()))
+                    .map((u: any) => u.nombre.trim())
+                    .filter((n: string) => n.length > 0);
+
+                // Keep the set to ensure uniqueness and sort
+                const uniqueComerciales = new Set<string>(comercialesList);
                 const uniqueTipos = new Set<string>();
 
                 // Helper to clean and add to set
                 const processRow = (row: string) => {
                     const parts = row.split('\t');
-                    // Index 3 is usually Usage/Comercial (confirmed via debug)
-                    if (parts.length > 3) {
-                        const rawName = parts[3] || '';
-                        // Clean up: remove \n, trim
-                        const name = rawName.replace(/[\n\r]+/g, '').trim();
-
-                        if (name && name.length > 2 && !name.includes('Usuario') && !name.includes('Producto')) { // Basic filter
-                            uniqueComerciales.add(name);
-                        }
-                    }
 
                     // Look for Type. It's often around index 6-8
                     for (let i = 5; i < parts.length; i++) {
@@ -87,25 +89,30 @@ export function useCRMData() {
 
                 eventos.forEach(processRow);
 
+                // Use specific account types requested by the user
+                const cuentasMap = ['POTENCIAL', 'CLIENTE', 'VIP', 'ALQUILER', 'VIP BIOFY'];
+
                 setData({
                     timestamp: jsonData.timestamp,
                     metrics: {
-                        entregados,
-                        confirmados,
-                        demos,
-                        ventas
+                        entregados: entregados,
+                        confirmados: confirmados,
+                        demos: demos,
+                        ventas: ventas
                     },
                     filters: {
                         comerciales: Array.from(uniqueComerciales).sort(),
-                        tipos: Array.from(uniqueTipos).sort()
+                        tipos: Array.from(uniqueTipos).sort(),
+                        cuentas: Array.from(cuentasMap).sort()
                     },
                     raw: {
                         eventos,
-                        pedidos
-                    }
+                        pedidos,
+                        usuarios
+                    },
+                    lastUpdate: new Date().toISOString(),
                 });
             } catch (err) {
-                // If file doesn't exist (e.g. first run), use fallback or 0
                 console.error(err);
                 setError('No CRM specific data found');
             } finally {

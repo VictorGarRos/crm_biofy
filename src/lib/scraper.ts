@@ -5,6 +5,7 @@ interface ScrapeResult {
     data?: {
         eventos: string[];
         pedidos: string[];
+        usuarios?: { login: string; nombre: string; tipo: string; rawRow: string; cells: string[] }[];
         timestamp: string;
     };
     error?: string;
@@ -129,13 +130,54 @@ export async function scrapeCRMData(username: string, password: string): Promise
             return rows.filter(r => r.innerText.includes('PENDIENTE') || r.innerText.includes('CONFIRMADO') || r.cells.length > 5).map(r => r.innerText);
         });
 
-        console.log(`Scraped ${eventos.length} potential events and ${pedidos.length} potential orders.`);
+        // 4. Scrape Usuarios
+        console.log('Scraping Usuarios (Read-Only)...');
+        // Let's go to the main user list page instead of the search page that might not exist or require different params
+        await page.goto('https://engloba.crmsmi.com/sm/usuarios/mod/fmodificar.asp', { waitUntil: 'networkidle2' });
+
+        // Add a console log block from evaluate to capture in puppeteer BEFORE evaluate
+        page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+
+        // Submit the search form to get all users
+        await page.evaluate(() => {
+            console.log('Clicking search button...');
+            const btn = document.querySelector<HTMLInputElement>('input[type="submit"][value="Buscar"]');
+            if (btn) {
+                btn.click();
+            } else {
+                const forms = document.forms;
+                if (forms.length > 0) forms[0].submit();
+            }
+        });
+
+        // Wait a bit for the search results to load (since it might not trigger a full navigation)
+        await new Promise(r => setTimeout(r, 4000));
+
+        // Parse Usuarios Table
+        const usuarios = await page.evaluate(() => {
+            const rows = Array.from(document.querySelectorAll('tr'));
+
+            return rows.slice(1).map(r => {
+                const cells = Array.from(r.cells).map(c => c.innerText.trim());
+
+                // From logs: | Código | Foto | Login | Nombre | Tipo | Teléfono Fijo |
+                // Since there is a leading empty string, index 3 is Login, index 4 is Nombre, index 5 is Tipo
+                const login = cells.length > 3 ? cells[3] : '';
+                const nombre = cells.length > 4 ? cells[4] : '';
+                const tipo = cells.length > 5 ? cells[5] : '';
+                const rawRow = r.innerText.trim();
+                return { login, nombre, tipo, rawRow, cells };
+            }).filter(u => u.nombre !== '' && !u.nombre.includes('Nombre') && u.cells.length > 2);
+        });
+
+        console.log(`Scraped ${eventos.length} potential events, ${pedidos.length} potential orders, and ${usuarios.length} users.`);
 
         return {
             success: true,
             data: {
                 eventos: eventos,
                 pedidos: pedidos,
+                usuarios: usuarios,
                 timestamp: new Date().toISOString()
             }
         };
