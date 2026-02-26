@@ -5,6 +5,7 @@ interface ScrapeResult {
     data?: {
         eventos: string[];
         pedidos: string[];
+        tareas?: string[];
         usuarios?: { login: string; nombre: string; tipo: string; rawRow: string; cells: string[] }[];
         timestamp: string;
     };
@@ -47,8 +48,13 @@ export async function scrapeCRMData(username: string, password: string): Promise
 
         // Helper to get date string YYYY-MM-DD
         const today = new Date();
-        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        const formatDate = (date: Date) => date.toISOString().split('T')[0];
+        const startOfMonth = new Date(today);
+        startOfMonth.setDate(today.getDate() - 7); // Fetch last 7 days to avoid 1000 record CRM limit
+        const formatDate = (date: Date) => {
+            const d = new Date(date);
+            d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+            return d.toISOString().split('T')[0];
+        };
 
         // SAFETY: Strictly READ-ONLY operations below. 
         // We only use the "Search" (Buscar) forms. We do NOT interact with "Guardar", "Borrar", or "Nuevo".
@@ -130,6 +136,70 @@ export async function scrapeCRMData(username: string, password: string): Promise
             return rows.filter(r => r.innerText.includes('PENDIENTE') || r.innerText.includes('CONFIRMADO') || r.cells.length > 5).map(r => r.innerText);
         });
 
+        // 3.5. Scrape Tareas by 'Fecha Alta Tarea'
+        console.log('Scraping Tareas (Read-Only)...');
+        await page.goto('https://engloba.crmsmi.com/sm/tareas/mod/fmodificar.asp', { waitUntil: 'networkidle2' });
+
+        await page.evaluate((start: string, end: string) => {
+            const ffdesde = document.querySelector<HTMLInputElement>('input[name="ffdesde"]');
+            if (ffdesde) ffdesde.value = start;
+
+            const ffhasta = document.querySelector<HTMLInputElement>('input[name="ffhasta"]');
+            if (ffhasta) ffhasta.value = end;
+
+            const ddesde = document.querySelector<HTMLInputElement>('input[name="ddesde"]');
+            if (ddesde) ddesde.checked = true;
+
+            const hhasta = document.querySelector<HTMLInputElement>('input[name="hhasta"]');
+            if (hhasta) hhasta.checked = true;
+
+            const equipo = document.querySelector<HTMLSelectElement>('select[name="equipo"]');
+            if (equipo) equipo.value = "6"; // 6 is TELEOPERADORAS
+
+            const cequipo = document.querySelector<HTMLInputElement>('input[name="cequipo"]');
+            if (cequipo) cequipo.checked = true;
+
+            const fdesde = document.querySelector<HTMLInputElement>('input[name="fdesde"]');
+            if (fdesde) fdesde.value = "";
+            // Inject n_reg and bdatos to force large pagination (bypass 1000 limit)
+            let n_reg = document.querySelector<HTMLInputElement>('input[name="n_reg"]');
+            if (!n_reg && document.forms.length > 0) {
+                n_reg = document.createElement('input');
+                n_reg.type = 'hidden';
+                n_reg.name = 'n_reg';
+                document.forms[0].appendChild(n_reg);
+            }
+            if (n_reg) n_reg.value = "10000";
+
+            let bdatos = document.querySelector<HTMLInputElement>('input[name="bdatos"]');
+            if (!bdatos && document.forms.length > 0) {
+                bdatos = document.createElement('input');
+                bdatos.type = 'hidden';
+                bdatos.name = 'bdatos';
+                document.forms[0].appendChild(bdatos);
+            }
+            if (bdatos) bdatos.value = "10000";
+
+            if (document.forms.namedItem('btareas')) {
+                (document.forms.namedItem('btareas') as HTMLFormElement).submit();
+            } else if (typeof (window as any).buscar === 'function') {
+                (window as any).buscar(0);
+            } else {
+                const btn = document.querySelector<HTMLInputElement>('input[type="submit"][value="Buscar"]');
+                if (btn) btn.click();
+                else if (document.forms.length > 0) (document.forms[0] as HTMLFormElement).submit();
+            }
+        }, formatDate(startOfMonth), formatDate(today));
+
+        // Let the form submission navigation finish
+        await page.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => { });
+        await new Promise(r => setTimeout(r, 3000));
+
+        const tareas = await page.evaluate(() => {
+            const rows = Array.from(document.querySelectorAll('tr'));
+            return rows.filter(r => r.cells.length > 5 && r.innerText.trim().length > 10).map(r => r.innerText);
+        });
+
         // 4. Scrape Usuarios
         console.log('Scraping Usuarios (Read-Only)...');
         // Let's go to the main user list page instead of the search page that might not exist or require different params
@@ -170,13 +240,14 @@ export async function scrapeCRMData(username: string, password: string): Promise
             }).filter(u => u.nombre !== '' && !u.nombre.includes('Nombre') && u.cells.length > 2);
         });
 
-        console.log(`Scraped ${eventos.length} potential events, ${pedidos.length} potential orders, and ${usuarios.length} users.`);
+        console.log(`Scraped ${eventos.length} potential events, ${pedidos.length} potential orders, ${tareas.length} tareas, and ${usuarios.length} users.`);
 
         return {
             success: true,
             data: {
                 eventos: eventos,
                 pedidos: pedidos,
+                tareas: tareas,
                 usuarios: usuarios,
                 timestamp: new Date().toISOString()
             }

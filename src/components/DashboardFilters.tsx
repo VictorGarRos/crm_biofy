@@ -16,25 +16,28 @@ interface DashboardFiltersProps {
     tipos: string[];
     cuentas: string[];
     onFilterUpdate: (filters: FilterState) => void;
+    userLabel?: string;
+    typeLabel?: string;
+    hideTipoFilter?: boolean;
 }
 
-export function DashboardFilters({ comerciales, tipos, cuentas, onFilterUpdate }: DashboardFiltersProps) {
+export function DashboardFilters({ comerciales, tipos, cuentas, onFilterUpdate, userLabel = 'Comercial', typeLabel = 'Tipo de Evento', hideTipoFilter = false }: DashboardFiltersProps) {
     const [selectedComercial, setSelectedComercial] = useState('');
     const [selectedTipo, setSelectedTipo] = useState('');
     const [selectedCuenta, setSelectedCuenta] = useState('');
     const [dateRange, setDateRange] = useState<DateRange | undefined>();
 
     const comercialOptions = [
-        { value: '', label: 'Todos', description: 'Mostrar todo el equipo' },
+        { value: '', label: 'Todos', description: `Mostrar todo el equipo` },
         ...comerciales.map(c => ({
             value: c,
             label: c,
-            description: 'Comercial'
+            description: userLabel
         }))
     ];
 
     const tipoOptions = [
-        { value: '', label: 'Todos los tipos', description: 'Cualquier interacción' },
+        { value: '', label: `Todos los ${typeLabel.toLowerCase()}s`, description: 'Cualquier interacción' },
         ...tipos.map(t => ({
             value: t,
             label: t,
@@ -61,11 +64,11 @@ export function DashboardFilters({ comerciales, tipos, cuentas, onFilterUpdate }
     };
 
     return (
-        <div className="flex flex-wrap items-end gap-4 mb-8 bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm relative z-20">
-            <div className="flex-1 min-w-[280px]">
+        <div className="flex flex-col md:flex-row flex-wrap items-end gap-4 mb-8 bg-white p-4 md:p-6 rounded-3xl md:rounded-[2.5rem] border border-slate-100 shadow-sm relative z-20">
+            <div className="flex-1 w-full md:min-w-[280px]">
                 <CustomSelect
                     label="Usuario"
-                    placeholder="Seleccionar comercial..."
+                    placeholder={`Seleccionar ${userLabel.toLowerCase()}...`}
                     options={comercialOptions}
                     value={selectedComercial}
                     onChange={setSelectedComercial}
@@ -74,19 +77,21 @@ export function DashboardFilters({ comerciales, tipos, cuentas, onFilterUpdate }
                 />
             </div>
 
-            <div className="flex-1 min-w-[200px]">
-                <CustomSelect
-                    label="Tipo de Evento"
-                    placeholder="Filtrar por tipo..."
-                    options={tipoOptions}
-                    value={selectedTipo}
-                    onChange={setSelectedTipo}
-                    icon={<Filter className="w-4 h-4" />}
-                    searchable={true}
-                />
-            </div>
+            {!hideTipoFilter && (
+                <div className="flex-1 w-full md:min-w-[200px]">
+                    <CustomSelect
+                        label={typeLabel}
+                        placeholder={`Filtrar por ${typeLabel.toLowerCase()}...`}
+                        options={tipoOptions}
+                        value={selectedTipo}
+                        onChange={setSelectedTipo}
+                        icon={<Filter className="w-4 h-4" />}
+                        searchable={true}
+                    />
+                </div>
+            )}
 
-            <div className="flex-1 min-w-[200px]">
+            <div className="flex-1 w-full md:min-w-[200px]">
                 <CustomSelect
                     label="Tipo de Cliente"
                     placeholder="Filtrar por cuenta..."
@@ -98,7 +103,7 @@ export function DashboardFilters({ comerciales, tipos, cuentas, onFilterUpdate }
                 />
             </div>
 
-            <div className="flex-1 min-w-[240px]">
+            <div className="flex-1 w-full md:min-w-[240px]">
                 <DateRangePicker
                     label="Rango Fechas"
                     date={dateRange}
@@ -106,10 +111,10 @@ export function DashboardFilters({ comerciales, tipos, cuentas, onFilterUpdate }
                 />
             </div>
 
-            <div className="">
+            <div className="w-full md:w-auto">
                 <button
                     onClick={handleUpdate}
-                    className="bg-[#0f172a] text-white px-8 py-3 rounded-2xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
+                    className="w-full md:w-auto bg-[#0f172a] text-white px-8 py-3 rounded-2xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0">
                     Actualizar
                 </button>
             </div>

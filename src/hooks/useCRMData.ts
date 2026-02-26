@@ -13,12 +13,16 @@ interface CRMData {
     };
     filters?: {
         comerciales: string[];
+        teleoperadoras: string[];
+        tecnicos: string[];
         tipos: string[];
+        tareas: string[];
         cuentas: string[];
     };
     raw: {
         eventos: string[];
         pedidos: string[];
+        tareas?: string[];
         usuarios?: { login: string; nombre: string; tipo: string; rawRow: string; cells: string[] }[];
     };
     lastUpdate?: string;
@@ -63,15 +67,30 @@ export function useCRMData() {
                 const ventas = realPedidos.length;
 
                 // Filter Comercial Dropdown directly from the extracted Users table
-                const validTypes = ['COMERCIAL', 'TECNICO'];
+                const validComercialTypes = ['COMERCIAL'];
                 const comercialesList = usuarios
-                    .filter((u: any) => validTypes.includes(u.tipo.toUpperCase()))
+                    .filter((u: any) => validComercialTypes.includes(u.tipo.toUpperCase()))
+                    .map((u: any) => u.nombre.trim())
+                    .filter((n: string) => n.length > 0);
+
+                const validTeleoperaTypes = ['TELEOPERADORA', 'COOR TELEOPERADORAS'];
+                const teleoperadorasList = usuarios
+                    .filter((u: any) => validTeleoperaTypes.includes(u.tipo.toUpperCase()))
+                    .map((u: any) => u.nombre.trim())
+                    .filter((n: string) => n.length > 0);
+
+                const validTecnicoTypes = ['TECNICO'];
+                const tecnicosList = usuarios
+                    .filter((u: any) => validTecnicoTypes.includes(u.tipo.toUpperCase()))
                     .map((u: any) => u.nombre.trim())
                     .filter((n: string) => n.length > 0);
 
                 // Keep the set to ensure uniqueness and sort
                 const uniqueComerciales = new Set<string>(comercialesList);
+                const uniqueTeleoperadoras = new Set<string>(teleoperadorasList);
+                const uniqueTecnicos = new Set<string>(tecnicosList);
                 const uniqueTipos = new Set<string>();
+                const uniqueTareas = new Set<string>();
 
                 // Helper to clean and add to set
                 const processRow = (row: string) => {
@@ -82,6 +101,14 @@ export function useCRMData() {
                         const val = parts[i].trim();
                         if (['VISITA', 'MANTENIMIENTO', 'INSTALACION', 'ENTREGA', 'INCIDENCIA', 'RECOGIDA', 'TRASLADO', 'VENTA'].includes(val)) {
                             uniqueTipos.add(val);
+
+                            // Simplified categorization: Lead Digital vs Llamada
+                            const task = parts[i + 1]?.trim().toUpperCase() || '';
+                            if (task.includes('CP') || task.includes('POTENCIAL')) {
+                                uniqueTareas.add('Lead Digital');
+                            } else {
+                                uniqueTareas.add('Llamada');
+                            }
                             break;
                         }
                     }
@@ -91,26 +118,26 @@ export function useCRMData() {
 
                 // Use specific account types requested by the user
                 const cuentasMap = ['POTENCIAL', 'CLIENTE', 'VIP', 'ALQUILER', 'VIP BIOFY'];
+                const uniqueCuentas = new Set<string>(cuentasMap); // Assuming uniqueCuentas is derived from cuentasMap
 
                 setData({
                     timestamp: jsonData.timestamp,
-                    metrics: {
-                        entregados: entregados,
-                        confirmados: confirmados,
-                        demos: demos,
-                        ventas: ventas
-                    },
+                    metrics: { entregados, confirmados, demos, ventas },
                     filters: {
                         comerciales: Array.from(uniqueComerciales).sort(),
+                        teleoperadoras: Array.from(uniqueTeleoperadoras).sort(),
+                        tecnicos: Array.from(uniqueTecnicos).sort(),
                         tipos: Array.from(uniqueTipos).sort(),
-                        cuentas: Array.from(cuentasMap).sort()
+                        tareas: Array.from(uniqueTareas).sort(),
+                        cuentas: Array.from(uniqueCuentas).sort()
                     },
                     raw: {
-                        eventos,
-                        pedidos,
-                        usuarios
+                        eventos: jsonData.eventos,
+                        pedidos: jsonData.pedidos,
+                        tareas: jsonData.tareas, // Added 'tareas' here
+                        usuarios: jsonData.usuarios
                     },
-                    lastUpdate: new Date().toISOString(),
+                    lastUpdate: new Date().toISOString()
                 });
             } catch (err) {
                 console.error(err);

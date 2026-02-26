@@ -1,0 +1,2902 @@
+<html><head>
+<title>:: SMI GSoft ::</title>
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<script>
+var correcto = 0;
+var esficha = 0;
+var eslistado = 0;
+function pulsarTecla() {
+	var teclaIE = event.keyCode
+	var teclaReal = String.fromCharCode(teclaIE)
+	if(teclaIE==17)
+	{
+		correcto = 1;
+	}
+	if(correcto == 1)
+	{
+		//viene de pulsar control
+		//alert(teclaIE)
+		if(teclaIE==16)
+		{
+			if(esficha==1)
+			{
+				frames.cuerpo_pes.document.getElementById('boton_ficha_1').focus();
+			}
+		}
+		if(teclaIE==13)
+		{
+			tecla_grabar();
+		}
+		if(teclaIE==37)
+		{
+			if(esficha==1)
+			{
+				if(pesta>1)
+				{
+					pesta = pesta - 1;
+					document.getElementById('pesta'+pesta).style.color = 'blue';
+					document.getElementById('pesta'+pesta).focus();
+				}
+				
+			}
+			else if(eslistado==1)
+			{
+				if(ele_actual<=elementos_flecha && ele_actual > ele_inicial)
+				{
+					fcolor2(ele_actual,color_anterior);
+					ele_actual = ele_actual - 1;
+					document.getElementById('boton_ficha_'+ele_actual).focus();
+					color_anterior = document.getElementById('tr_'+ele_actual).bgColor;
+					fcolor(ele_actual);
+				}
+			}
+		}
+		if(teclaIE==39)
+		{
+			if(esficha==1)
+			{
+				if(pesta<pesta_total)
+				{
+					pesta=pesta+1;
+					document.getElementById('pesta'+pesta).focus();
+				}
+			}
+			else if(eslistado==1)
+			{
+				if(ele_actual<elementos_flecha)
+				{
+					fcolor2(ele_actual,color_anterior);
+					ele_actual = ele_actual + 1;
+					document.getElementById('boton_ficha_'+ele_actual).focus();
+					color_anterior = document.getElementById('tr_'+ele_actual).bgColor;
+					fcolor(ele_actual);
+				}
+			}
+		}
+		if(teclaIE==48)
+		{
+			if(acceso[0]!= '')
+			{
+				window.open(acceso[0], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+0");
+			}
+		}
+		if(teclaIE==49)
+		{
+			if(acceso[1]!= '')
+			{
+				window.open(acceso[1], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+1");
+			}
+		}
+		if(teclaIE==50&&false)
+		{
+			if(acceso[2]!= '')
+			{
+				window.open(acceso[2], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+2");
+			}
+		}
+		if(teclaIE==51)
+		{
+			if(acceso[3]!= '')
+			{
+				window.open(acceso[3], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+3");
+			}
+		}
+		if(teclaIE==52)
+		{
+			if(acceso[4]!= '')
+			{
+				window.open(acceso[4], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+4");
+			}
+		}
+		if(teclaIE==53)
+		{
+			if(acceso[5]!= '')
+			{
+				window.open(acceso[5], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+5");
+			}
+		}
+		if(teclaIE==54)
+		{
+			if(acceso[6]!= '')
+			{
+				window.open(acceso[6], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+6");
+			}
+		}
+		if(teclaIE==55)
+		{
+			if(acceso[7]!= '')
+			{
+				window.open(acceso[7], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+7");
+			}
+		}
+		if(teclaIE==56)
+		{
+			if(acceso[8]!= '')
+			{
+				window.open(acceso[8], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+8");
+			}
+		}
+		if(teclaIE==57)
+		{
+			if(acceso[9]!= '')
+			{
+				window.open(acceso[9], "");
+			}
+			else
+			{
+				alert("No existe Función definida para Ctrl+9");
+			}
+		}
+	}
+}
+function soltartecla2() 
+{
+	var teclaIE = event.keyCode
+	var teclaReal = String.fromCharCode(teclaIE)
+	if(teclaIE==17)
+	{
+		correcto = 0;		
+	}
+}
+color_flecha = '#efefef';
+document.onkeydown = pulsarTecla
+document.onkeyup = soltartecla2
+
+
+</script>
+<script>
+	var alto=;
+	var ancho=;
+	var acceso_rapido = "http://engloba.crmsmi.com/sm";
+	
+	var acceso = new Array ('','','','','','','','','','');
+	
+			acceso[0] = "http://engloba.crmsmi.com/sm/clientes2/alta/falta.asp";
+		
+			acceso[1] = "http://engloba.crmsmi.com/sm/tareas/alta/falta.asp";
+		
+			acceso[3] = "http://engloba.crmsmi.com/sm/clientes2/mod/afmodificar.asp";
+		
+			acceso[5] = "http://engloba.crmsmi.com/sm/articulos/mod/fmodificar.asp";
+		
+			acceso[7] = "http://engloba.crmsmi.com/sm/agenda/agenda/semana.asp";
+		
+			acceso[8] = "http://engloba.crmsmi.com/sm/articulos/traspasos/atj.asp";
+		
+			acceso[9] = "http://engloba.crmsmi.com/sm/configuracion/configuracion/fmodificar.asp";
+		
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<link rel="stylesheet" href="../../estilo.css" type="text/css">
+<script>
+// JavaScript Document
+
+//lupas
+//0-nada
+//1-clientes
+//2-productos
+//3-oportunidades
+//4-campañas
+//5-contactos
+//6-eventos
+//7-tareas
+//8-inmuebles
+
+
+// CLIENTES
+function asigna_cli(frame,pedido)
+{	
+	if (!frame)
+	{
+		frame = "oculto";
+	}
+	vcod = 0;
+	vnom = 0;
+	vcom = 0;
+	b_cliente_cod = "";	
+	b_cliente = "";	
+	b_cliente_com = "";	
+	
+	if (document.forms[f].elements['b_cliente'].value!="")
+	{
+		vnom = 1;
+		b_cliente = document.forms[f].elements['b_cliente'].value;
+	}
+	
+	if (vcom == 1 || vcod == 1 || vnom ==1)
+	{
+		document.getElementById(frame).src = "../../clientes2/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+b_cliente+"&ccodigo2=1&codigo2="+b_cliente_cod+"&cnombre_comercial=1&nombre_comercial="+b_cliente_com+"&pedido="+pedido;
+	}
+	else
+	{
+		window.open("../../clientes2/mod/afmodificar.asp?open=1&lupa=1&pedido="+pedido, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");	
+	}
+}
+function actualiza_cliente(id,nombre,nombre_com,cod,pedido,direccion,telefono,pcontacto,cp)
+{
+	document.forms[f].elements['cliente'].value = id;
+	document.forms[f].elements['b_cliente'].value = nombre.replace("·","'");
+	
+	document.getElementById("capa_nombre").value=nombre.replace("·","'");
+	document.getElementById("capa_domicilio").value=direccion.replace("·","'");
+	if(cp!=undefined)
+	{
+		document.getElementById("capa_cpPob").value=cp.replace("·","'");
+	}
+	else
+	document.getElementById("capa_cpPob").value="";
+	document.getElementById("capa_telefono_fijo").value=telefono;
+	document.getElementById("capa_p_contacto").value=pcontacto.replace("·","'");
+	ocultarLupa(1);
+	if(pedido!=undefined && pedido!="")
+	{
+		document.getElementById('contacto').src = "./asigna_dir_contacto.asp?id="+id+"&pedido="+pedido
+	}
+	document.getElementById('oculto').src = "./asigna_cliente2.asp?id="+id+"&pedido="+pedido
+	document.getElementById('asigna_cli').src = "../../comunes/busquedas/asigna.asp?cliente="+id;
+}
+function pgeneral(id)
+{
+	document.forms[f].elements['cliente'].value = -1;
+	document.forms[f].elements['b_cliente'].value = "";
+	document.forms[f].elements['b_cliente'].readOnly = false;
+	
+	mostrarLupa(1);
+	document.getElementById('asigna_cli').src = "../../comunes/busquedas/asigna.asp?cliente=-1";
+}
+function fficha(id,gempresa)
+{
+	fecha = new Date() 
+	tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+	window.open("../../clientes2/mod/fichacon.asp?gempresa="+gempresa+"&abrir=1&clave="+tmp+"&b="+id, "");
+}
+
+
+// PROVEEDOR
+function asigna_prov()
+{	
+	if (document.forms[f].elements['b_cliente'].value!="")
+	{
+		document.getElementById('oculto').src = "../../proveedores/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+document.forms[f].elements['b_cliente'].value;
+	}
+	else
+	{
+		window.open("../../proveedores/mod/afmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");	
+	}
+}
+function actualiza_proveedor(id,nombre,direccion,telefono,pcontacto,cp)
+{
+	document.forms[f].elements['cliente'].value = id;
+	document.forms[f].elements['b_cliente'].value = nombre.replace("·","'");
+	ocultarLupa(1);
+	document.getElementById('asigna_prov').src = "../../comunes/busquedas/asigna.asp?proveedor="+id;
+}
+function provgeneral(id)
+{
+	document.forms[f].elements['cliente'].value = -1;
+	document.forms[f].elements['b_cliente'].value = "";
+	document.forms[f].elements['b_cliente'].readOnly = false;
+	mostrarLupa(1);
+	
+	document.getElementById('asigna_prov').src = "../../comunes/busquedas/asigna.asp?proveedor=-1";
+}
+function fficha_prov(id)
+{
+	fecha = new Date() 
+	tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+	window.open("../../proveedores/mod/fichacon.asp?abrir=1&clave="+tmp+"&b="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+// PRODUCTOS GENERALES
+function asigna_prod_gen()
+{
+	if (document.forms[f].elements['b_prod_gen'].value!="")
+	{
+		document.getElementById('oculto').src = "../../articulos/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnmodelo=1&nmodelo="+document.forms[f].elements['b_prod_gen'].value;
+	}
+	else
+	{
+		window.open("../../articulos/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function asigna_prod_gen_dpedido()
+{
+	document.forms[f].elements['b_prod_gen'].value=document.forms[f].elements['nom_prod'].value;
+	if (document.forms[f].elements['b_prod_gen'].value!="")
+	{
+		document.getElementById('oculto').src = "../../articulos/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnmodelo=1&nmodelo="+document.forms[f].elements['b_prod_gen'].value;
+	}
+	else
+	{
+		window.open("../../articulos/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function actualiza_prod_gen(id,nombre)
+{
+	document.forms[f].elements['prod_gen'].value = id;
+	document.forms[f].elements['b_prod_gen'].value = nombre;
+	ocultarLupa(10);
+	document.getElementById('asigna_prod').src = "../../comunes/busquedas/asigna.asp?prod_gen="+id;
+}
+function prodgeneral_gen(id)
+{
+	document.forms[f].elements['prod_gen'].value = -1;
+	document.forms[f].elements['b_prod_gen'].value = "";
+	mostrarLupa(10);
+	document.getElementById('asigna_prod').src = "../../comunes/busquedas/asigna.asp?prod_gen=-1";
+}
+function fficha_prod(id)
+{
+	window.open("../../articulos/mod/fichacon.asp?id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+
+var asignarCliente=true;
+// OPORTUNIDADES
+function asigna_op(noCliente)
+{
+	if (document.forms[f].elements['b_oportunidad'].value!="")
+	{
+		document.getElementById('oculto').src = "../../op/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&ctitulo=1&titulo="+document.forms[f].elements['b_oportunidad'].value;
+	}
+	else
+	{
+		window.open("../../op/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");	
+	}
+}
+function actualiza_oportunidad(id,cliente,nombreOportunidad,nombreCliente,direccion,telefono,pcontacto)
+{
+	document.forms[f].elements['oportunidad'].value = id;
+	document.forms[f].elements['b_oportunidad'].value = nombreOportunidad.replace("·","'");
+	
+	ocultarLupa(3);
+	actualiza_cliente(cliente,nombreCliente,'',direccion,telefono,pcontacto);
+	document.getElementById('asigna_op').src = "../../comunes/busquedas/asigna.asp?op="+id;
+}
+function opgeneral()
+{
+	document.forms[f].elements['oportunidad'].value = -1;
+	document.forms[f].elements['b_oportunidad'].value = "";
+	
+	mostrarLupa(3);
+	document.getElementById('asigna_op').src = "../../comunes/busquedas/asigna.asp?op=-1";
+}
+function fficha_op(id)
+{
+	window.open("../../op/mod/fichacon.asp?id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+
+// CAMPAÑAS 
+function asigna_cmp()
+{
+	if (document.forms[f].elements['b_cmp'].value!="")
+		document.getElementById('oculto').src = "../../cmp/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&ctitulo=1&titulo="+document.forms[f].elements['b_cmp'].value;
+	else
+		window.open("../../cmp/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");	
+}
+function actualiza_cmp(id,nombre)
+{
+	document.forms[f].elements['cmp'].value = id;
+	document.forms[f].elements['b_cmp'].value = nombre;
+	
+	ocultarLupa(4);
+	document.getElementById('asigna_cmp').src = "../../comunes/busquedas/asigna.asp?cmp="+id;
+}
+function cmpgeneral(id)
+{
+	document.forms[f].elements['cmp'].value = -1;
+	document.forms[f].elements['b_cmp'].value = "";
+	
+	mostrarLupa(4);
+	document.getElementById('asigna_cmp').src = "../../comunes/busquedas/asigna.asp?cmp=0";
+}
+function fficha_cmp(id)
+{
+	window.open("../../agenda/cmp_modifica/fichacon2.asp?id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+
+// CONTACTOS
+function asigna_con()
+{
+	if (document.forms[f].elements['b_con'].value!="")
+		document.getElementById('oculto').src = "../../clientes_con/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cconnombre=1&connombre="+document.forms[f].elements['b_con'].value;
+	else
+		window.open("../../clientes_con/mod/afmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");	
+}
+function actualiza_contacto(id_con,nombre)
+{
+	document.forms[f].elements['id_con'].value = id_con;
+	document.forms[f].elements['b_con'].value = nombre;
+	
+	ocultarLupa(5);
+	document.getElementById('asigna_contacto').src = "../../comunes/busquedas/asigna.asp?contacto="+id;
+}
+function congeneral()
+{
+	document.forms[f].elements['id_con'].value = -1;
+	document.forms[f].elements['b_con'].value = "";
+	
+	mostrarLupa(5);
+	document.getElementById('asigna_contacto').src = "../../comunes/busquedas/asigna.asp?contacto=-1";
+}
+function fficha_con(id,id_cli)
+{
+	window.open("../../agenda/clientes_con_modifica/contactos.asp?id_con="+id+"&b="+id_cli, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+
+// EVENTOS
+function asigna_eve()
+{
+	if (document.forms[f].elements['b_eve'].value!="")
+	{
+		document.getElementById('oculto').src = "../../agenda/listados/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+document.forms[f].elements['b_eve'].value;
+	}
+	else
+	{
+		window.open("../../agenda/listados/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");	
+	}
+}
+function actualiza_evento(id,nombre)
+{
+	document.forms[f].elements['id_eve'].value = id;
+	document.forms[f].elements['b_eve'].value = nombre;
+	
+	ocultarLupa(6);
+	document.getElementById('asigna_evento').src = "../../comunes/busquedas/asigna.asp?evento="+id;	
+}
+function evegeneral()
+{
+	document.forms[f].elements['id_eve'].value = -1;
+	document.forms[f].elements['b_eve'].value = "";
+	
+	mostrarLupa(6);
+	document.getElementById('asigna_evento').src = "../../comunes/busquedas/asigna.asp?evento=-1";	
+}
+function fficha_eve(id,id_eve)
+{
+	window.open("../../agenda/agenda/modificar.asp?id="+id+"&b="+id_eve, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+
+
+// TAREAS
+function asigna_tar_di()
+{
+	document.getElementById('oculto').src = "../../agenda/tareas_modifica_directo/fmodificar.asp?b=1&id_tar="+document.getElementById('b_tar').value;
+}
+function asigna_tar(id)
+{
+	window.open("../../tareas/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");	
+}
+function actualiza_tarea(id,nombre)
+{
+	document.forms[f].elements['id_tar'].value = id;
+	document.forms[f].elements['b_tar'].value = nombre.replace("·","'");
+	
+	ocultarLupa(7);
+	document.getElementById('asigna_tarea').src = "../../comunes/busquedas/asigna.asp?tarea="+id;	
+}
+function targeneral()
+{
+	document.forms[f].elements['id_tar'].value = -1;
+	document.forms[f].elements['b_tar'].value = "";
+	
+	mostrarLupa(7);
+	document.getElementById('asigna_tarea').src = "../../comunes/busquedas/asigna.asp?tarea=-1";	
+}
+function fficha_tar(id)
+{
+	window.open("../../agenda/tareas_modifica/fichacon.asp?id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+
+//inmuebles
+function fficha_inm(id)
+{
+	fecha = new Date() 
+	tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+	window.open("../../inmuebles/mod/fichacon.asp?abrir=1&clave="+tmp+"&id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+}
+function asigna_inm(frame)
+{
+	if (!frame)
+	{
+		frame = "oculto";
+	}
+	if (document.forms[f].elements['b_inmueble'].value!="")
+	{
+		document.getElementById(frame).src = "../../inmuebles/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cref=1&ref="+document.forms[f].elements['b_inmueble'].value;
+	}
+	else
+	{
+		fecha = new Date() 
+		tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+		window.open("../../inmuebles/mod/afmodificar.asp?clave="+tmp+"&open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function actualiza_inmueble(id,nombre)
+{
+	document.forms[f].elements['inmueble'].value = id;
+	document.forms[f].elements['b_inmueble'].value = nombre.replace("·","'");
+	
+	ocultarLupa(8);
+	document.getElementById('asigna_inmueble').src = "../../comunes/busquedas/asigna.asp?inmueble="+id;	
+}
+function inmgeneral(id)
+{
+	document.forms[f].elements['inmueble'].value = -1;
+	document.forms[f].elements['b_inmueble'].value = "";
+	mostrarLupa(8);
+	document.getElementById('asigna_inmueble').src = "../../comunes/busquedas/asigna.asp?inmueble=-1";	
+}
+
+
+// PEDIDOS 
+function asigna_prod()
+{
+	if (document.forms[f].elements['b_prod'].value!="")
+	{
+		document.getElementById('oculto').src = "../../pedidos/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+document.forms[f].elements['b_prod'].value;
+	}
+	else
+	{
+		window.open("../../pedidos/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function asigna_prod_dcuenta()
+{
+	if(document.forms[f].elements['b_cliente'].value!='')
+	{
+		document.forms[f].elements['b_prod'].value=document.forms[f].elements['b_cliente'].value;
+	}
+	if (document.forms[f].elements['b_prod'].value!="")
+	{
+		document.getElementById('oculto').src = "../../pedidos/mod/lmodificar.asp?b=1&rapidas=1&open=1&ped_cliente="+document.forms[f].elements['ped_cliente'].value+"&lupa=1";
+	}
+	else
+	{
+		window.open("../../pedidos/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function actualiza_prod(id,nombre,nombre2)
+{
+	document.forms[f].elements['prod'].value = id;
+	document.forms[f].elements['b_prod'].value = nombre;
+	document.forms[f].elements['nom_prod'].value = nombre2;
+	
+	ocultarLupa(9);
+	document.getElementById('asigna_lpedido').src = "../../comunes/busquedas/asigna.asp?lpedido="+id;	
+}
+function prodgeneral(id)
+{
+	document.forms[f].elements['prod'].value = -1;
+	document.forms[f].elements['b_prod'].value = "";
+	mostrarLupa(9);
+	document.getElementById('asigna_lpedido').src = "../../comunes/busquedas/asigna.asp?lpedido=-1";	
+}
+
+// PEDIDOS, ficha desde seleccion de pedido.
+function fficha_ped(id)
+{
+	fecha = new Date() 
+	tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+	window.open("../../pedidos/mod/fichacabecera.asp?abrir=1&clave="+tmp+"&b="+id+"&antes_cab="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+}
+
+// USUARIOS
+function fficha_usu(id)
+{
+	if(document.forms[0].elements['usuario'].value!=-1)
+	{
+		window.open("../../agenda/usuarios_modifica/ficha2.asp?b="+document.forms[0].elements['usuario'].value, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");		
+	}
+	else
+	{
+		alert("Debe Seleccionar un Usuario");
+	}
+}
+
+// MAQUINAS
+function asigna_maquina()
+{
+	if (document.forms[f].elements['b_maquina'].value!="")
+	{
+		document.getElementById('oculto').src = "../../maquinas/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnomcliente=1&nomcliente="+document.forms[f].elements['b_maquina'].value;
+	}
+	else
+	{
+		window.open("../../maquinas/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function asigna_maquina_dcuenta()
+{
+	if(document.forms[f].elements['b_cliente'].value!='')
+	{
+		document.forms[f].elements['b_maquina'].value=document.forms[f].elements['b_cliente'].value;
+	}
+	if (document.forms[f].elements['b_maquina'].value!="")
+	{
+		document.getElementById('oculto').src = "../../maquinas/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnomcliente=1&nomcliente="+document.forms[f].elements['b_maquina'].value;
+	}
+	else
+	{
+		window.open("../../maquinas/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function actualiza_maquina(id,nombre)
+{
+	document.forms[f].elements['maquina'].value = id;
+	document.forms[f].elements['b_maquina'].value = nombre;
+	ocultarLupa(11);
+	document.getElementById('asigna_maquina').src = "../../comunes/busquedas/asigna.asp?maquina="+id;	
+}
+function maquinageneral(id)
+{
+	document.forms[f].elements['maquina'].value = -1;
+	document.forms[f].elements['b_maquina'].value = "";
+	mostrarLupa(11);
+	document.getElementById('asigna_maquina').src = "../../comunes/busquedas/asigna.asp?maquina=-1";	
+}
+function fficha_maquina(id)
+{
+	fecha = new Date() 
+	tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+	window.open("../../maquinas/mod/fichacon.asp?abrir=1&clave="+tmp+"&id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+}
+
+// FORMULARIOS
+function asigna_formu()
+{
+	if (document.forms[f].elements['b_formu'].value!="")
+	{
+		document.getElementById('oculto').src = "../../formularios/agform_consulta/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+document.forms[f].elements['b_formu'].value;
+	}
+	else
+	{
+		window.open("../../formularios/agform_consulta/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function n_formu()
+{
+	window.open("../../formularios/agform/tipo_form.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+}
+function asigna_formu_dcuenta()
+{
+	if(document.forms[f].elements['b_cliente'].value!='')
+	{
+		document.forms[f].elements['b_formu'].value=document.forms[f].elements['b_cliente'].value;
+	}
+	if (document.forms[f].elements['b_formu'].value!="")
+	{
+		document.getElementById('oculto').src = "../../formularios/agform_consulta/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+document.forms[f].elements['b_formu'].value;
+	}
+	else
+	{
+		window.open("../../formularios/agform_consulta/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function actualiza_formu(id,nombre)
+{
+	document.forms[f].elements['formu'].value = id;
+	document.forms[f].elements['b_formu'].value = nombre;
+	ocultarLupa(12);
+	document.getElementById('asigna_formu').src = "../../comunes/busquedas/asigna.asp?formu="+id;	
+}
+function formugeneral(id)
+{
+	document.forms[f].elements['formu'].value = -1;
+	document.forms[f].elements['b_formu'].value = "";
+	mostrarLupa(12);
+	document.getElementById('asigna_formu').src = "../../comunes/busquedas/asigna.asp?formu=-1";	
+}
+function fficha_formu(id)
+{
+	fecha = new Date() 
+	tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+	window.open("../../formularios/agform_consulta/fichacon.asp?abrir=1&clave="+tmp+"&id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+}
+
+// CONTRATOS
+function asigna_contrato()
+{
+	if (document.forms[f].elements['b_contrato'].value!="")
+	{
+		document.getElementById('oculto').src = "../../contratos/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+document.forms[f].elements['b_contrato'].value;
+	}
+	else
+	{
+		window.open("../../contratos/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function asigna_contrato_dcuenta()
+{
+	if(document.forms[f].elements['b_cliente'].value!='')
+	{
+		document.forms[f].elements['b_contrato'].value=document.forms[f].elements['b_cliente'].value;
+	}
+	if (document.forms[f].elements['b_contrato'].value!="")
+	{
+		document.getElementById('oculto').src = "../../contratos/mod/lmodificar.asp?b=1&rapidas=1&open=1&lupa=1&cnombre=1&nombre="+document.forms[f].elements['b_contrato'].value;
+	}
+	else
+	{
+		window.open("../../contratos/mod/fmodificar.asp?open=1&lupa=1", "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+	}
+}
+function actualiza_contrato(id,nombre)
+{
+	document.forms[f].elements['contrato'].value = id;
+	document.forms[f].elements['b_contrato'].value = nombre;
+	ocultarLupa(13);
+	document.getElementById('asigna_contrato').src = "../../comunes/busquedas/asigna.asp?contrato="+id;	
+}
+function contratogeneral(id)
+{
+	document.forms[f].elements['contrato'].value = -1;
+	document.forms[f].elements['b_contrato'].value = "";
+	mostrarLupa(13);
+	document.getElementById('asigna_contrato').src = "../../comunes/busquedas/asigna.asp?contrato=-1";	
+}
+function fficha_contrato(id)
+{
+	fecha = new Date() 
+	tmp=fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear()+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+	window.open("../../contratos/mod/fichacon.asp?abrir=1&clave="+tmp+"&id="+id, "", "top=5, left = 5,width=-30,height=-50,scrollbars=yes,toolbar=no,location=no,resizable=yes,menubar=no,fixed=no");
+}// JavaScript Document
+
+// GENERICAS
+
+function mostrarLupa(id)
+{
+	document.getElementById('btnAsignar'+id).style.display='inline';
+	document.getElementById('btnsAsignado'+id).style.display='none';
+}
+function ocultarLupa(id)
+{
+	document.getElementById('btnAsignar'+id).style.display='none';
+	document.getElementById('btnsAsignado'+id).style.display='inline';
+}
+
+function dateAdd(p_Interval, p_Number, p_Date){
+	if(isNaN(p_Number)){return "invalid number: '" + p_Number + "'";}	
+
+	p_Number = new Number(p_Number);
+	var dt = new Date(p_Date);
+	switch(p_Interval.toLowerCase()){
+		case "yyyy": {// year
+			dt.setFullYear(dt.getFullYear() + p_Number);
+			break;
+		}
+		case "q": {		// quarter
+			dt.setMonth(dt.getMonth() + (p_Number*3));
+			break;
+		}
+		case "m": {		// month
+			dt.setMonth(dt.getMonth() + p_Number);
+			break;
+		}
+		case "y":		// day of year
+		case "d":		// day
+		case "w": {		// weekday
+			dt.setDate(dt.getDate() + p_Number);
+			break;
+		}
+		case "ww": {	// week of year
+			dt.setDate(dt.getDate() + (p_Number*7));
+			break;
+		}
+		case "h": {		// hour
+			dt.setHours(dt.getHours() + p_Number);
+			break;
+		}
+		case "n": {		// minute
+			dt.setMinutes(dt.getMinutes() + p_Number);
+			break;
+		}
+		case "s": {		// second
+			dt.setSeconds(dt.getSeconds() + p_Number);
+			break;
+		}
+		case "ms": {		// second
+			dt.setMilliseconds(dt.getMilliseconds() + p_Number);
+			break;
+		}
+		default: {
+			return "invalid interval: '" + p_Interval + "'";
+		}
+	}
+	return dt;
+}
+
+function ventanaCalendario(numCal,fecha,X,Y)
+{
+	//Se utiliza para situar el calendario.
+	//event.clientX se puede usar solo con onclick
+	//determina un margen de pixels del div al raton
+	margin=5;
+
+	//La variable IE determina si estamos utilizando IE
+	var IE = document.all?true:false;
+	//Si no utilizamos IE capturamos el evento del mouse
+	if (!IE) document.captureEvents(Event.MOUSEMOVE)
+
+	var tempX = 0;
+	var tempY = 0;
+
+	if(IE)
+	{ //para IE
+		tempX = event.clientX + document.body.scrollLeft;
+		tempY = event.clientY + document.body.scrollTop;
+	}else{ //para netscape
+		tempX = 300; 
+		tempY = 300;
+		//tempX = event.pageX;
+		//tempY = event.pageY;
+	}
+	
+	document.getElementById("frame_fecha").src="../../comunes/calendario/calendario.asp?fecha="+fecha+"&numCal="+numCal;
+	
+	if(X!=0)
+	{
+		if (tempY < 150)
+		{
+			document.getElementById("calendario").style.left=tempX - 120;
+			document.getElementById("calendario").style.top=tempY + 15;
+		}
+		else
+		{
+			document.getElementById("calendario").style.left=tempX - 120;
+			document.getElementById("calendario").style.top=tempY - 170;
+		}
+	}
+	else
+	{
+		document.getElementById("calendario").style.left=20;	
+		document.getElementById("calendario").style.top=5;
+	}
+		
+	document.getElementById('calendario').style.visibility = 'visible';
+}
+
+function salir()
+{
+	document.getElementById('calendario').style.visibility = 'hidden';
+}
+
+function validar_email(valor) 
+{
+	//if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(valor))
+	var filter=/^[A-Za-z][A-Za-z0-9_.-]*@[A-Za-z][A-Za-z0-9_-]+([\-]?[\.]?[A-Za-z0-9_])*[\.]([A-za-z]{2,4})$/;
+
+	if (filter.test(valor))
+	{
+		return true;
+	}
+	else
+	{
+		if (valor == "")
+		{
+			return true;
+		}
+		else
+		{
+			//alert("incorrecto");
+			return false;
+		}
+	}
+}
+function es_numero(valor) 
+{
+	//if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(valor))
+	var filter=/^[0-9]*$/;
+
+	if (filter.test(valor))
+	{
+		return true;
+	}
+	else
+	{
+		if (valor == "")
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+function Browser() 
+{
+	this.isIE = false; // Internet Explorer
+	this.isNS = false; // Netscape
+	this.isOpera = false; // Opera
+	if (navigator.userAgent.indexOf("Netscape6/") >= 0) 
+	{
+		this.isNS = true;
+		return;
+	}
+	if (navigator.userAgent.indexOf("Gecko") >= 0) 
+	{
+		this.isNS = true;
+		return;
+	}
+	if (navigator.userAgent.indexOf("MSIE") >=0 && navigator.userAgent.indexOf("Opera") <0) 
+	{
+		this.isIE = true;
+		return;
+	}
+	if (navigator.userAgent.indexOf("Opera") >=0) 
+	{
+		this.isOpera = true;
+		return;
+	}
+}
+var browser = new Browser();
+function mostrar(uno) 
+{ 
+	if (browser.isIE) {
+		x = window.event.clientX + document.documentElement.scrollLeft
+		+ document.body.scrollLeft;
+		y = window.event.clientY + document.documentElement.scrollTop
+		+ document.body.scrollTop;
+	}
+	if (browser.isNS) {
+		x = event.clientX + window.scrollX;
+		y = event.clientY + window.scrollY;
+	}
+	if (browser.isOpera) {
+		x = window.event.clientX + document.documentElement.scrollLeft;
+		y = window.event.clientY + document.documentElement.scrollTop;
+	} 
+	document.getElementById("datos_cliente").style.visibility = "visible";
+	document.getElementById("datos_cliente").style.left= (x - 25) +"px";
+	document.getElementById("datos_cliente").style.top = y + 20 +"px";
+	if(uno==1)
+	{
+		document.getElementById("datos_cliente").style.left= "440px";
+		document.getElementById("datos_cliente").style.top = "35px";
+	}
+} 
+function ocultar() 
+{ 
+	document.getElementById("datos_cliente").style.visibility='hidden';
+}
+// JavaScript Document
+
+function gestionInicio(inicio,tipo)
+{
+	//alert("GESTION INICIO " +idPerfil + "   " + inicio);
+	if(document.forms[f].tipo_busqueda)
+		if(tipo!=0)
+			document.forms[f].tipo_busqueda.value = tipo;
+	if(matriz.length>0)
+	{
+		posIdDefecto="-1";
+
+		for(i=1;i<matriz.length;i++)
+		{			
+			document.forms[f].busqueda.length=document.forms[f].busqueda.length+1;
+			
+			//if(document.forms[f].busqueda.length>2)
+				document.forms[f].busqueda[document.forms[f].busqueda.length-1].style.background="#FFFF99";
+			
+			document.forms[f].busqueda[i].value=i;
+			if(matriz[i][4]==1)
+				ambito="U - "
+			else
+			{
+				if (matriz[i][4]==2)
+				{
+					ambito="P - "
+				}
+				else
+				{
+					if(matriz[i][4]==3)
+					{
+						ambito="D - "
+					}
+					else
+					{
+						if(matriz[i][4]==4)
+						{
+							ambito="E - "
+						}
+						else {
+							ambito=""	
+						}
+					}
+				}
+			}
+			document.forms[f].busqueda[i].innerHTML=ambito+matriz[i][1];
+			
+			if(matriz[i][3]==1 && inicio != -1)
+			{
+				posIdDefecto = i;
+			}
+			
+			if(matriz[i][0]==idPerfil)
+			{
+				posIdVector = matriz[i][0];
+			}
+		}
+				
+		codigoInicial=document.body.innerHTML; 
+		
+		//alert("idPerfil = " + idPerfil);
+		if ( idPerfil == '')
+		{
+			//alert("posIdDefecto = " + posIdDefecto);
+			if(posIdDefecto!="-1")
+			{
+				rellenarBusqueda(matriz[posIdDefecto][2]);
+				document.forms[f].busqueda.style.display='inline';
+				document.forms[f].busqueda[posIdDefecto].selected=true;
+				//document.getElementById('txtBusqueda').style.display='inline';
+			}
+			else
+				document.forms[f].busqueda.style.display='inline';			
+		}
+		else if( idPerfil != "-1" )
+		{
+			//alert("inicio = " + inicio);
+			if(inicio!='' && inicio!=-1)
+			{
+				//alert(matriz[inicio][2]);
+				rellenarBusqueda(matriz[inicio][2]);
+				document.forms[f].busqueda.style.display='inline';
+				document.forms[f].busqueda.value = parseInt(inicio);
+			}
+			else
+			{
+				//alert("posIdDefecto " + posIdDefecto);
+				if(posIdDefecto!="-1")
+				{
+					rellenarBusqueda(matriz[posIdDefecto][2]);
+					document.forms[f].busqueda.style.display='inline';
+					document.forms[f].busqueda[posIdDefecto].selected=true;
+				}
+				else
+				{
+					document.forms[f].busqueda.style.display='inline';
+				}
+			}
+		}
+			
+	}
+	else //if (idPerfil == "")
+	{	
+		document.forms[f].busqueda.style.display='inline';
+		document.forms[f].busqueda[0].selected=true;
+		//document.getElementById('txtBusqueda').style.display='inline';	
+	}
+}
+
+//Llama a una función que se encuentra en la raíz de la página
+function adecuarFecha(nombre,valor)
+{
+	cadena = nombre.substr(9,10)
+	switch(cadena)
+	{
+		case "1": ponFecha(valor,'fdesde','desde','fhasta','hasta');
+					break;
+		case "2": ponFecha(valor,'fdesde_2','desde_2','fhasta_2','hasta_2');
+					break;
+		case "3": ponFecha(valor,'ffdesde','ddesde','ffhasta','hhasta');
+					break;
+		case "4": ponFecha(valor,'fffdesde','dddesde','fffhasta','hhhasta');
+					break;
+		case "5": ponFecha(valor,'fdesde2','desde2','fhasta2','hasta2');
+					break;
+		case "6": ponFecha(valor,'fdesde3','desde3','fhasta3','hasta3');
+					break;
+		default: alert("CASO NO ESTUDIADO");
+	}
+}			
+
+function rellenarBusqueda(cadena)
+{
+		
+		form = unescape(cadena);
+
+		elementos1 = form.split("&"); 
+		for(i=1;i<elementos1.length;i++)
+		{
+			elementos2 = elementos1[i].split("=");
+			nombre=elementos2[0];
+			valor=elementos2[1];
+			if(document.forms[f].elements[nombre].type=="checkbox")
+			{
+				document.forms[f].elements[nombre].checked=valor;
+			}
+			else if(
+				(document.forms[f].elements[nombre].type=="select-one" || document.forms[f].elements[nombre].type=="select-multiple")
+				&&
+				(document.forms[f].elements[nombre].name!="busqueda" )
+				)
+			{
+				//Cambio los text fecha, para adecuar el intervalo
+				if(document.forms[f].elements[nombre].name.substr(0,9) == "intervalo")
+					adecuarFecha(document.forms[f].elements[nombre].name,valor);
+				for(j=0;j<document.forms[f].elements[nombre].length;j++)
+				{
+					if(document.forms[f].elements[nombre][j].value==valor)
+						document.forms[f].elements[nombre][j].selected="true";
+				}
+			}
+			else if(document.forms[f].elements[nombre].type=="text" || document.forms[f].elements[nombre].type=="textarea" || document.forms[f].elements[nombre].type=="hidden")
+			{
+				document.forms[f].elements[nombre].value=valor;
+			}	
+			else if(document.forms[f].elements[nombre].type=="submit")
+			{
+			}
+			else if(document.forms[f].elements[nombre][0].type=="radio")
+			{
+				for(j=0;j<document.forms[f].elements[nombre].length;j++)
+				{
+					if(document.forms[f].elements[nombre][j].value==valor)
+						document.forms[f].elements[nombre][j].checked="true";
+				}
+			}
+		}
+
+			//------ Gestion de las lupas 
+			
+			if(lupas[1] && document.forms[f].elements['b_cliente'].value!="" && document.forms[f].elements['b_cliente'].value!="-1")
+				ocultarLupa(1);
+			if(lupas[2] && document.forms[f].elements['b_producto'].value!="" && document.forms[f].elements['b_producto'].value!="-1")
+				ocultarLupa(2);
+			if(lupas[3] && document.forms[f].elements['b_oportunidad'].value!="" && document.forms[f].elements['b_oportunidad'].value!="-1")
+				ocultarLupa(3);
+			if(lupas[4] && document.forms[f].elements['b_cmp'].value!="" && document.forms[f].elements['b_cmp'].value!="-1")
+				ocultarLupa(4);
+			if(lupas[5] && document.forms[f].elements['b_con'].value!="" && document.forms[f].elements['b_con'].value!="-1")
+				ocultarLupa(5);
+			if(lupas[6] && document.forms[f].elements['b_eve'].value!="" && document.forms[f].elements['b_eve'].value!="-1")
+				ocultarLupa(6);
+			if(lupas[7] && document.forms[f].elements['b_tar'].value!="" && document.forms[f].elements['b_tar'].value!="-1")
+				ocultarLupa(7);
+			//-------
+		
+}
+
+function gestionBusqueda()
+{
+	//alert("Gestión Busqueda");
+	if(document.forms[f].busqueda.value!=-1)
+	{	
+		vaciarBusqueda();
+		//alert(matriz[parseInt(document.forms[f].busqueda.value)][2]);
+		rellenarBusqueda(matriz[parseInt(document.forms[f].busqueda.value)][2]);
+	}
+	else
+	{
+		document.body.innerHTML=codigoInicial;
+		
+		//Mostrar select de seleccion de busquedas		
+		document.forms[f].busqueda.style.display='inline';
+		document.forms[f].busqueda[0].selected=true;
+		//document.getElementById('txtBusqueda').style.display='inline';		
+	} 
+}
+
+function vaciarBusqueda()
+{
+
+		for(i=0;i<document.forms[f].elements.length;i++)
+		{		
+	
+			if(document.forms[f].elements[i].type=="checkbox")
+			{
+				document.forms[f].elements[i].checked=false;
+			}
+			else if((document.forms[f].elements[i].type=="select-one" || document.forms[f].elements[i].type=="select-multiple") && document.forms[f].elements[i].name!="busqueda")
+			{
+				for(j=0;j<document.forms[f].elements[i].length;j++)
+						document.forms[f].elements[i][j].selected=false;
+			}
+			else if(document.forms[f].elements[i].type=="text" ||  document.forms[f].elements[i].type=="hidden")
+			{
+				document.forms[f].elements[i].value="";
+			}	
+			else if(document.forms[f].elements[i].type=="submit")
+			{
+			}
+			else
+			{
+				if(document.forms[f].elements[i].value==0 || document.forms[f].elements[i].value==-1)
+					document.forms[f].elements[i].checked=true;	
+			}
+											
+		}
+		//------ Gestion de las lupas 
+		
+		if(lupas[1]) 
+			mostrarLupa(1);
+		if(lupas[2]) 
+			mostrarLupa(2);
+		if(lupas[3]) 
+			mostrarLupa(3);
+		if(lupas[4]) 
+			mostrarLupa(4);
+		if(lupas[5]) 
+			mostrarLupa(5);
+		if(lupas[6]) 
+			mostrarLupa(6);
+		if(lupas[7]) 
+			mostrarLupa(7);
+		
+		//-------	
+}
+
+
+function igualarSelects(tam)
+{
+
+		for(i=0;i<document.forms[f].elements.length;i++)
+		{		
+			if((document.forms[f].elements[i].type=="select-one" || document.forms[f].elements[i].type=="select-multiple") && document.forms[f].elements[i].name!="busqueda")
+			{
+				document.forms[f].elements[i].style.width=tam;
+			}
+		}
+
+}
+</script>
+<script>
+//Variables de entorno
+</script>
+</head>
+<body bgcolor="#aaaaff">
+
+	
+<table><tbody><tr><td height="1"></td></tr></tbody></table>
+
+<table class="no_boton_6" width="98%" align="center" bgcolor="#eeeeee" border="0">
+	<form action="./lmodificar.asp?b=1" method="post" name="btareas" onsubmit="buscar(0)"></form>
+	<tbody><tr>
+		<td colspan="2">
+			<table class="no_boton_1" bgcolor="#ffffff" width="100%" height="35" align="center">
+			
+				<tbody><tr>
+					<td width="20"></td>
+					<td class="enlacesframe7" width="100%"></td>
+					<td></td>
+					<td class="enlacesframe7" align="right"><input style="visibility:hidden" type="submit" name="bfecha" class="boton_2" value="Buscar"></td>
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+			<tr>
+            	<td bgcolor="#084C93" class="no_boton_3" align="center">&nbsp;<font size="2"><b>Datos Cliente Tarea</b></font></td>
+            	<td bgcolor="#084C93" class="no_boton_3" align="center">&nbsp;<font size="2"><b>Datos Tarea</b></font></td>
+			</tr>
+			<tr>
+                <td valign="top">
+                	<table class="genlacesframe7" align="right">
+                        <tbody><tr><td>
+                            Código:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="codigo_cli" size="10" class="buscar_sn" onclick="vaciar(this)" onchange="automarcado(this)">
+                        </td>
+                        <td><input type="checkbox" value="1" name="ccodigo_cli" class="clase_check_mini"></td>
+                        
+                        </tr>
+                        
+                        <tr><td>
+                            Nombre:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="nombre" size="48" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="40">
+                        </td>
+                        <td><input type="checkbox" value="1" name="cnombre" class="clase_check_mini"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td valign="top">
+                                <font color="#000040">Zonas:&nbsp;</font>
+                            </td>
+							
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="l_reactivadas_boton_1" class="pboton_2" onclick="fun_l_reactivadas(1)">&nbsp;ZONA 1&nbsp;</td>
+                                            
+                                        <input type="hidden" name="l_reactivadas">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        
+                        <tr><td>
+                            Nif/Cif:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="cif" size="15" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="12">
+                        </td>
+                        <td><input type="checkbox" value="1" name="ccif" class="clase_check_mini"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                Teléfonos:&nbsp;
+                            </td>
+                            <td>
+                                <input type="text" name="telefonof" size="15" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="12">
+                            </td>
+                            <td><input type="checkbox" value="1" name="ctelefonof" class="clase_check_mini"></td>
+                        </tr>
+                        <tr><td>
+                            Domicilio:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="direccion" size="48" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="40">
+                        </td>
+                        <td><input type="checkbox" value="1" name="cdireccion" class="clase_check_mini"></td>
+                        </tr>
+                        <tr><td>
+                            Localidad:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="poblacion" size="48" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="40">
+                        </td>
+                        <td><input type="checkbox" value="1" name="cpoblacion" class="clase_check_mini"></td>
+                        </tr>
+                        
+                        <tr><td>
+                            Provincia:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="provincia" size="48" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="40">
+                        </td>
+                        <td><input type="checkbox" value="1" name="cprovincia" class="clase_check_mini"></td>
+                        </tr>
+                        
+                        <tr><td>
+                            Código Postal:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="postal" size="15" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="10">
+                        </td>
+                        <td><input type="checkbox" value="1" name="cpostal" class="clase_check_mini"></td>
+                        </tr>
+                        <tr><td>
+                            Observaciones Cuenta:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="observaciones_cli" size="48" class="buscar_n" onclick="vaciar(this)" onchange="automarcado(this)" maxlength="40">
+                        </td>
+                        <td><input type="checkbox" value="1" name="cobservaciones_cli" class="clase_check_mini"></td>
+                        </tr>
+                        
+                        <tr>
+                            
+                            <td valign="top">
+                                Fecha Alta:&nbsp;
+                            </td>
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="mfdesde" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="cmfdesde" class="clase_check_mini">
+                                        </td>
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="mfhasta" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="cmfhasta" class="clase_check_mini">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table cellpadding="0" cellspacing="0">
+<tbody><tr>
+    <td id="mfdesdeayer" class="pboton_2" onclick="ayer(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Ayer&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mfdesdehoy" class="pboton_2" onclick="hoy(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Hoy&nbsp;&nbsp;</td>
+    <td width="5" bgcolor="#000000"></td>
+
+    <td id="mfdesdesant" class="pboton_2" onclick="sant(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Sem.Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mfdesdesact" class="pboton_2" onclick="sact(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Sem Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="mfdesdesprox" class="pboton_2" onclick="sprox(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Sem Prox&nbsp;&nbsp;</td>
+<td width="5" bgcolor="#000000"></td>
+    
+    <td id="mfdesdef1t" class="pboton_2" onclick="f1t(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;1T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mfdesdef2t" class="pboton_2" onclick="f2t(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;2T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+</tr>
+<tr>
+    <td id="mfdesdemanya" class="pboton_2" onclick="manya(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Mañana&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+
+
+	<td class="boton_3" align="center" onclick="desmarcar(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">X</td>
+    <td width="5" bgcolor="#000000"></td>
+    
+
+
+    <td id="mfdesdemesant" class="pboton_2" onclick="mesant(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Mes Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mfdesdemesact" class="pboton_2" onclick="mesact(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Mes Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mfdesdemesprox" class="pboton_2" onclick="mesprox(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;Mes Prox&nbsp;&nbsp;</td>
+	<td width="5" bgcolor="#000000"></td>
+    
+	<td id="mfdesdef3t" class="pboton_2" onclick="f3t(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;3T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="mfdesdef4t" class="pboton_2" onclick="f4t(&quot;mfdesde&quot;,&quot;cmfdesde&quot;,&quot;mfhasta&quot;,&quot;cmfhasta&quot;)">&nbsp;&nbsp;4T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <input type="hidden" id="cmfdesdemarca" name="cmfdesdemarca" value="">
+</tr>
+</tbody></table>
+
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td valign="top">
+                                Fecha Mod:&nbsp;
+                            </td>
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="mmfdesde" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="cmmfdesde" class="clase_check_mini">
+                                        </td>
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="mmfhasta" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="cmmfhasta" class="clase_check_mini">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table cellpadding="0" cellspacing="0">
+<tbody><tr>
+    <td id="mmfdesdeayer" class="pboton_2" onclick="ayer(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Ayer&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mmfdesdehoy" class="pboton_2" onclick="hoy(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Hoy&nbsp;&nbsp;</td>
+    <td width="5" bgcolor="#000000"></td>
+
+    <td id="mmfdesdesant" class="pboton_2" onclick="sant(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Sem.Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mmfdesdesact" class="pboton_2" onclick="sact(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Sem Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="mmfdesdesprox" class="pboton_2" onclick="sprox(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Sem Prox&nbsp;&nbsp;</td>
+<td width="5" bgcolor="#000000"></td>
+    
+    <td id="mmfdesdef1t" class="pboton_2" onclick="f1t(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;1T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mmfdesdef2t" class="pboton_2" onclick="f2t(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;2T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+</tr>
+<tr>
+    <td id="mmfdesdemanya" class="pboton_2" onclick="manya(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Mañana&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+
+
+	<td class="boton_3" align="center" onclick="desmarcar(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">X</td>
+    <td width="5" bgcolor="#000000"></td>
+    
+
+
+    <td id="mmfdesdemesant" class="pboton_2" onclick="mesant(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Mes Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mmfdesdemesact" class="pboton_2" onclick="mesact(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Mes Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="mmfdesdemesprox" class="pboton_2" onclick="mesprox(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;Mes Prox&nbsp;&nbsp;</td>
+	<td width="5" bgcolor="#000000"></td>
+    
+	<td id="mmfdesdef3t" class="pboton_2" onclick="f3t(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;3T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="mmfdesdef4t" class="pboton_2" onclick="f4t(&quot;mmfdesde&quot;,&quot;cmmfdesde&quot;,&quot;mmfhasta&quot;,&quot;cmmfhasta&quot;)">&nbsp;&nbsp;4T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <input type="hidden" id="cmmfdesdemarca" name="cmmfdesdemarca" value="">
+</tr>
+</tbody></table>
+
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        
+                        
+                        <tr>
+                            <td valign="top" bgcolor="#ddddff" class="filtro-box">
+                                <font color="#000040">Tipo Cuenta:&nbsp;</font>
+                            </td>
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="real_boton_1" class="pboton_2" onclick="fun_real(1)">&nbsp;POTENCIAL&nbsp;</td>
+                                            
+                                            <td id="real_boton_2" class="pboton_2" onclick="fun_real(2)">&nbsp;CLIENTE&nbsp;</td>
+                                            
+                                            <td id="real_boton_3" class="pboton_2" onclick="fun_real(3)">&nbsp;VIP&nbsp;</td>
+                                            
+                                            <td id="real_boton_4" class="pboton_2" onclick="fun_real(4)">&nbsp;ALQUILER&nbsp;</td>
+                                            
+                                                </tr><tr>
+                                                
+                                            <td id="real_boton_5" class="pboton_2" onclick="fun_real(5)">&nbsp;VIP BIOFY&nbsp;</td>
+                                            
+                                        <input type="hidden" name="real">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        
+                    </tbody></table>  
+                </td>
+                <td valign="top">
+                	<table class="genlacesframe7" align="left">
+                    	<tbody><tr>
+                            <td valign="top" class="filtro-box" rowspan="3" height="120">
+                                Tarea Tipo:&nbsp;
+                                
+                                <div id="btn_opciones" style="position: fixed; left: -0.5rem; top: 1.5rem; z-index: 20;display: block;">
+                                    <table onclick="cal_tec();" bgcolor="#aaaaff" id="bcal_tec" class="boton_1" width="125"><tbody><tr><td><img height="35" src="../../iconos/tecnicos.png"></td><td></td><td>Técnico&nbsp;</td></tr></tbody></table>
+                                    <input type="hidden" name="ccal_tec" value="">
+                                </div>
+                            
+                                <div id="btn_opciones" style="position: fixed; left: -0.5rem; top: 4.3rem; z-index: 20;display: block;">
+                                    <table onclick="cal_com();" bgcolor="#aaaaff" id="bcal_com" class="boton_1" width="125"><tbody><tr><td><img height="35" src="../../iconos/comercial.png"></td><td></td><td>Comer&nbsp;</td></tr></tbody></table>
+                                    <input type="hidden" name="ccal_com" value="">
+                                </div>
+                                
+                            </td>
+                            
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                        <input type="hidden" name="tareas_tipo">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+	                	<tr>
+                            
+
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="tareas_tipo_boton_12" class="pboton_2" onclick="fun_tareas_tipo(12)">&nbsp;LEAD DIGITAL&nbsp;</td>
+                                            
+                                            <td id="tareas_tipo_boton_11" class="pboton_2" onclick="fun_tareas_tipo(11)">&nbsp;LLAMADA&nbsp;</td>
+                                            
+
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="tareas_tipo_boton_1" class="pboton_2" onclick="fun_tareas_tipo(1)">&nbsp;REPASO&nbsp;</td>
+                                            
+                                            <td id="tareas_tipo_boton_13" class="pboton_2" onclick="fun_tareas_tipo(13)">&nbsp;MANTENIMIENTO&nbsp;</td>
+                                            
+
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td valign="top" rowspan="3" class="filtro-box">
+                                Tarea Estado:&nbsp;
+                            </td>
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="estado_boton_1" class="pboton_2" onclick="fun_estado(1)">&nbsp;PENDIENTE&nbsp;</td>
+                                            
+                                            <td id="estado_boton_2" class="pboton_2" onclick="fun_estado(2)">&nbsp;CONCERTADO&nbsp;</td>
+                                            
+                                            <td id="estado_boton_4" class="pboton_2" onclick="fun_estado(4)">&nbsp;NULO&nbsp;</td>
+                                            
+                                            <td id="estado_boton_3" class="pboton_2" onclick="fun_estado(3)">&nbsp;ERROR&nbsp;</td>
+                                            
+                                                </tr><tr>
+                                                
+                                            <td id="estado_boton_5" class="pboton_2" onclick="fun_estado(5)">&nbsp;NO LOCALIZA&nbsp;</td>
+                                            
+                                            <td id="estado_boton_6" class="pboton_2" onclick="fun_estado(6)">&nbsp;FUERA DE ZONA&nbsp;</td>
+                                            
+                                        <input type="hidden" name="estado">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                            </td>
+                            
+
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                            </td>
+                            
+
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+
+                        
+                        	<tr>
+                                <td>
+                                    Campaña:&nbsp;
+                                </td>
+                                <td>
+                                    <input type="text" id="campa" name="campa" size="15" class="buscar_sn" maxlength="40" onclick="vaciar(this)" onchange="automarcado(this)">
+                                </td>
+                                <td><input type="checkbox" value="1" name="ccampa" class="clase_check_mini"></td>
+                            </tr>
+                        
+                        <tr><td>
+                            Título:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="titulo" size="48" class="buscar_n" maxlength="99" onclick="vaciar(this)" onchange="automarcado(this)">
+                        </td>
+                        <td><input type="checkbox" value="1" name="ctitulo" class="clase_check_mini"></td>
+                        </tr>
+                        <script>
+                            document.forms[0].elements['titulo'].focus();
+                        </script>
+                        <tr><td>
+                            Comentarios:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="comentario" size="48" class="buscar_n" maxlength="40" onclick="vaciar(this)" onchange="automarcado(this)">
+                        </td>
+                        <td><input type="checkbox" value="1" name="ccomentario" class="clase_check_mini"></td>
+                        </tr>
+                        
+                        <tr>
+                            
+                            <td valign="top">
+                                Fecha Inicio:&nbsp;
+                            </td>
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="fdesde" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="desde" class="clase_check_mini">
+                                        </td>
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="fhasta" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="hasta" class="clase_check_mini">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table cellpadding="0" cellspacing="0">
+<tbody><tr>
+    <td id="fdesdeayer" class="pboton_2" onclick="ayer(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Ayer&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesdehoy" class="pboton_2" onclick="hoy(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Hoy&nbsp;&nbsp;</td>
+    <td width="5" bgcolor="#000000"></td>
+
+    <td id="fdesdesant" class="pboton_2" onclick="sant(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Sem.Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesdesact" class="pboton_2" onclick="sact(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Sem Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="fdesdesprox" class="pboton_2" onclick="sprox(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Sem Prox&nbsp;&nbsp;</td>
+<td width="5" bgcolor="#000000"></td>
+    
+    <td id="fdesdef1t" class="pboton_2" onclick="f1t(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;1T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesdef2t" class="pboton_2" onclick="f2t(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;2T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+</tr>
+<tr>
+    <td id="fdesdemanya" class="pboton_2" onclick="manya(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Mañana&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+
+
+	<td class="boton_3" align="center" onclick="desmarcar(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">X</td>
+    <td width="5" bgcolor="#000000"></td>
+    
+
+
+    <td id="fdesdemesant" class="pboton_2" onclick="mesant(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Mes Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesdemesact" class="pboton_2" onclick="mesact(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Mes Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesdemesprox" class="pboton_2" onclick="mesprox(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;Mes Prox&nbsp;&nbsp;</td>
+	<td width="5" bgcolor="#000000"></td>
+    
+	<td id="fdesdef3t" class="pboton_2" onclick="f3t(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;3T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="fdesdef4t" class="pboton_2" onclick="f4t(&quot;fdesde&quot;,&quot;desde&quot;,&quot;fhasta&quot;,&quot;hasta&quot;)">&nbsp;&nbsp;4T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <input type="hidden" id="desdemarca" name="desdemarca" value="">
+</tr>
+</tbody></table>
+
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td valign="top">
+                                Fecha Fin:&nbsp;
+                            </td>
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="fdesde_2" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="desde_2" class="clase_check_mini">
+                                        </td>
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="fhasta_2" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="hasta_2" class="clase_check_mini">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table cellpadding="0" cellspacing="0">
+<tbody><tr>
+    <td id="fdesde_2ayer" class="pboton_2" onclick="ayer(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Ayer&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesde_2hoy" class="pboton_2" onclick="hoy(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Hoy&nbsp;&nbsp;</td>
+    <td width="5" bgcolor="#000000"></td>
+
+    <td id="fdesde_2sant" class="pboton_2" onclick="sant(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Sem.Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesde_2sact" class="pboton_2" onclick="sact(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Sem Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="fdesde_2sprox" class="pboton_2" onclick="sprox(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Sem Prox&nbsp;&nbsp;</td>
+<td width="5" bgcolor="#000000"></td>
+    
+    <td id="fdesde_2f1t" class="pboton_2" onclick="f1t(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;1T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesde_2f2t" class="pboton_2" onclick="f2t(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;2T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+</tr>
+<tr>
+    <td id="fdesde_2manya" class="pboton_2" onclick="manya(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Mañana&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+
+
+	<td class="boton_3" align="center" onclick="desmarcar(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">X</td>
+    <td width="5" bgcolor="#000000"></td>
+    
+
+
+    <td id="fdesde_2mesant" class="pboton_2" onclick="mesant(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Mes Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesde_2mesact" class="pboton_2" onclick="mesact(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Mes Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fdesde_2mesprox" class="pboton_2" onclick="mesprox(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;Mes Prox&nbsp;&nbsp;</td>
+	<td width="5" bgcolor="#000000"></td>
+    
+	<td id="fdesde_2f3t" class="pboton_2" onclick="f3t(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;3T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="fdesde_2f4t" class="pboton_2" onclick="f4t(&quot;fdesde_2&quot;,&quot;desde_2&quot;,&quot;fhasta_2&quot;,&quot;hasta_2&quot;)">&nbsp;&nbsp;4T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <input type="hidden" id="desde_2marca" name="desde_2marca" value="">
+</tr>
+</tbody></table>
+
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                Origen:&nbsp;
+                            </td>
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="tareas_origen_boton_2" class="pboton_2" onclick="fun_tareas_origen(2)">&nbsp;REGISTROS MOVILES&nbsp;</td>
+                                            
+                                            <td id="tareas_origen_boton_3" class="pboton_2" onclick="fun_tareas_origen(3)">&nbsp;AXEXOR&nbsp;</td>
+                                            
+                                            <td id="tareas_origen_boton_4" class="pboton_2" onclick="fun_tareas_origen(4)">&nbsp;SIGNO/GE&nbsp;</td>
+                                            
+                                            <td id="tareas_origen_boton_5" class="pboton_2" onclick="fun_tareas_origen(5)">&nbsp;PROSPECCION&nbsp;</td>
+                                            
+                                                </tr><tr>
+                                                
+                                            <td id="tareas_origen_boton_6" class="pboton_2" onclick="fun_tareas_origen(6)">&nbsp;REFERIDOS&nbsp;</td>
+                                            
+                                            <td id="tareas_origen_boton_1" class="pboton_2" onclick="fun_tareas_origen(1)">&nbsp;MKT&nbsp;</td>
+                                            
+                                            <td id="tareas_origen_boton_7" class="pboton_2" onclick="fun_tareas_origen(7)">&nbsp;FERIAS/EVENTOS&nbsp;</td>
+                                            
+                                        <input type="hidden" name="tareas_origen">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                Prioridad:&nbsp;
+                            </td>
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="prioridad_boton_3" class="pboton_2" onclick="fun_prioridad(3)">&nbsp;Normal&nbsp;</td>
+                                            
+                                            <td id="prioridad_boton_1" class="pboton_2" onclick="fun_prioridad(1)">&nbsp;Urgente&nbsp;</td>
+                                            
+                                            <td id="prioridad_boton_5" class="pboton_2" onclick="fun_prioridad(5)">&nbsp;PRE -NULO&nbsp;</td>
+                                            
+                                            <td id="prioridad_boton_4" class="pboton_2" onclick="fun_prioridad(4)">&nbsp;ULT. HORA&nbsp;</td>
+                                            
+                                                </tr><tr>
+                                                
+                                            <td id="prioridad_boton_6" class="pboton_2" onclick="fun_prioridad(6)">&nbsp;PRIM. HORA&nbsp;</td>
+                                            
+                                        <input type="hidden" name="prioridad">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        
+                        <tr><td>
+                            Reporte:&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" name="reporte" size="48" class="buscar_n" maxlength="40" onclick="vaciar(this)" onchange="automarcado(this)">
+                        </td>
+                        <td><input type="checkbox" value="1" name="creporte" class="clase_check_mini"></td>
+                        </tr>
+                        <tr> 
+                            <td valign="top" align="right">
+                            Reporte:&nbsp;
+                            </td>
+                            
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="tareas_reporte_boton_1" class="pboton_2" onclick="fun_tareas_reporte(1)">&nbsp;YA NO INTERESA&nbsp;</td>
+                                            
+                                            <td id="tareas_reporte_boton_2" class="pboton_2" onclick="fun_tareas_reporte(2)">&nbsp;NO PERMITE INFO&nbsp;</td>
+                                            
+                                            <td id="tareas_reporte_boton_3" class="pboton_2" onclick="fun_tareas_reporte(3)">&nbsp;COMPETENCIA&nbsp;</td>
+                                            
+                                            <td id="tareas_reporte_boton_4" class="pboton_2" onclick="fun_tareas_reporte(4)">&nbsp;NO CONVENCE&nbsp;</td>
+                                            
+                                                </tr><tr>
+                                                
+                                        <input type="hidden" name="tareas_reporte">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr> 
+                            <td valign="top" align="right">
+                            Reporte:&nbsp;
+                            </td>
+                            
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="tareas_reporte_boton_5" class="pboton_2" onclick="fun_tareas_reporte(5)">&nbsp;VISITA&nbsp;</td>
+                                            
+                                            <td id="tareas_reporte_boton_6" class="pboton_2" onclick="fun_tareas_reporte(6)">&nbsp;RETRASO DECISION&nbsp;</td>
+                                            
+
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr> 
+                            <td valign="top" align="right">
+                            Reporte:&nbsp;
+                            </td>
+                            
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td valign="top">
+                                Fecha Alta Tarea:&nbsp;
+                            </td>
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="ffdesde" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="ddesde" class="clase_check_mini">
+                                        </td>
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="ffhasta" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="hhasta" class="clase_check_mini">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table cellpadding="0" cellspacing="0">
+<tbody><tr>
+    <td id="ffdesdeayer" class="pboton_2" onclick="ayer(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Ayer&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="ffdesdehoy" class="pboton_2" onclick="hoy(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Hoy&nbsp;&nbsp;</td>
+    <td width="5" bgcolor="#000000"></td>
+
+    <td id="ffdesdesant" class="pboton_2" onclick="sant(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Sem.Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="ffdesdesact" class="pboton_2" onclick="sact(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Sem Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="ffdesdesprox" class="pboton_2" onclick="sprox(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Sem Prox&nbsp;&nbsp;</td>
+<td width="5" bgcolor="#000000"></td>
+    
+    <td id="ffdesdef1t" class="pboton_2" onclick="f1t(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;1T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="ffdesdef2t" class="pboton_2" onclick="f2t(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;2T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+</tr>
+<tr>
+    <td id="ffdesdemanya" class="pboton_2" onclick="manya(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Mañana&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+
+
+	<td class="boton_3" align="center" onclick="desmarcar(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">X</td>
+    <td width="5" bgcolor="#000000"></td>
+    
+
+
+    <td id="ffdesdemesant" class="pboton_2" onclick="mesant(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Mes Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="ffdesdemesact" class="pboton_2" onclick="mesact(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Mes Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="ffdesdemesprox" class="pboton_2" onclick="mesprox(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;Mes Prox&nbsp;&nbsp;</td>
+	<td width="5" bgcolor="#000000"></td>
+    
+	<td id="ffdesdef3t" class="pboton_2" onclick="f3t(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;3T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="ffdesdef4t" class="pboton_2" onclick="f4t(&quot;ffdesde&quot;,&quot;ddesde&quot;,&quot;ffhasta&quot;,&quot;hhasta&quot;)">&nbsp;&nbsp;4T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <input type="hidden" id="ddesdemarca" name="ddesdemarca" value="">
+</tr>
+</tbody></table>
+
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td valign="top">
+                                Fecha Mod Tarea:&nbsp;
+                            </td>
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="fffdesde" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="dddesde" class="clase_check_mini">
+                                        </td>
+                                        <td>
+                                            <input type="date" size="15" class="buscar_n" name="fffhasta" value="2026-02-01"> 
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" value="1" name="hhhasta" class="clase_check_mini">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table cellpadding="0" cellspacing="0">
+<tbody><tr>
+    <td id="fffdesdeayer" class="pboton_2" onclick="ayer(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Ayer&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fffdesdehoy" class="pboton_2" onclick="hoy(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Hoy&nbsp;&nbsp;</td>
+    <td width="5" bgcolor="#000000"></td>
+
+    <td id="fffdesdesant" class="pboton_2" onclick="sant(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Sem.Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fffdesdesact" class="pboton_2" onclick="sact(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Sem Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="fffdesdesprox" class="pboton_2" onclick="sprox(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Sem Prox&nbsp;&nbsp;</td>
+<td width="5" bgcolor="#000000"></td>
+    
+    <td id="fffdesdef1t" class="pboton_2" onclick="f1t(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;1T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fffdesdef2t" class="pboton_2" onclick="f2t(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;2T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+</tr>
+<tr>
+    <td id="fffdesdemanya" class="pboton_2" onclick="manya(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Mañana&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+
+
+	<td class="boton_3" align="center" onclick="desmarcar(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">X</td>
+    <td width="5" bgcolor="#000000"></td>
+    
+
+
+    <td id="fffdesdemesant" class="pboton_2" onclick="mesant(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Mes Ant&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fffdesdemesact" class="pboton_2" onclick="mesact(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Mes Act&nbsp;&nbsp;</td>
+    <td width="5"></td>
+
+    <td id="fffdesdemesprox" class="pboton_2" onclick="mesprox(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;Mes Prox&nbsp;&nbsp;</td>
+	<td width="5" bgcolor="#000000"></td>
+    
+	<td id="fffdesdef3t" class="pboton_2" onclick="f3t(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;3T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <td id="fffdesdef4t" class="pboton_2" onclick="f4t(&quot;fffdesde&quot;,&quot;dddesde&quot;,&quot;fffhasta&quot;,&quot;hhhasta&quot;)">&nbsp;&nbsp;4T&nbsp;&nbsp;</td>
+    <td width="5"></td>
+    
+    <input type="hidden" id="dddesdemarca" name="dddesdemarca" value="">
+</tr>
+</tbody></table>
+
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+					</tbody></table>
+                </td>
+            </tr>
+            
+            <tr>
+                <td bgcolor="#084C93" class="no_boton_3" align="center">&nbsp;<font size="2"><b>Datos Usuario</b></font></td>
+                <td bgcolor="#084C93" class="no_boton_3" align="center">&nbsp;<font size="2"><b>Datos Producto</b></font></td>
+            </tr>
+            
+			<tr>
+                <td valign="top">
+                	<table class="genlacesframe7" align="right">
+                        <tbody><tr>
+                            <td>
+                                Usuario:&nbsp;
+                            </td>
+                            <td>
+                                <input type="text" name="nom_usu1" size="48" class="buscar_n" maxlength="40" onclick="vaciar(this)" onchange="automarcado(this)">
+                            </td>
+                            <td><input type="checkbox" value="1" name="cnom_usu1" class="clase_check_mini"></td>
+                        </tr>
+                        <tr>
+                            <td valign="top">Equipo:</td>
+                            
+                            <td><select name="equipo" class="buscar_n" onchange="automarcado(this)">
+                                    <option value="-1">--- Seleccione Equipo ---</option>
+                                    
+                                        <option value="4">ADMINISTRACIÓN CENTRAL</option>
+                                        
+                                        <option value="3">ADMINISTRACIÓN COMERCIAL</option>
+                                        
+                                        <option value="1">DPTO. COMERCIAL</option>
+                                        
+                                        <option value="2">CONSULTORES TECNICOS</option>
+                                        
+                                        <option value="5">DPTO. TÉCNICO</option>
+                                        
+                                        <option value="6">TELEOPERADORAS</option>
+                                        
+                                </select>						
+                            </td>
+                            <td><input type="checkbox" value="1" name="cequipo" class="clase_check_mini"></td>
+                        </tr>
+                    </tbody></table>
+                </td>
+                <td valign="top">
+                	<table class="genlacesframe7" align="left">
+	                    <tbody><tr>
+                            <td>
+                                Serie:&nbsp;
+                            </td>
+                            <td>
+                                <input type="text" name="serie" size="15" class="buscar_n" maxlength="12" onclick="vaciar(this)" onchange="automarcado(this)">
+                            </td>
+                            <td><input type="checkbox" value="1" name="cserie" class="clase_check_mini"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td valign="top">
+                                Máquina Activa:&nbsp;
+                            </td>
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        <td id="mactiva_boton_0" class="pboton_2" onclick="fun_solo_mactiva(0)">&nbsp;&nbsp;&nbsp;NO&nbsp;&nbsp;&nbsp;</td>
+                                        <td id="mactiva_boton_1" class="pboton_2" onclick="fun_solo_mactiva(1)">&nbsp;&nbsp;&nbsp;SI&nbsp;&nbsp;&nbsp;</td>
+                                        <input type="hidden" name="mactiva">
+                                        <input type="hidden" name="num_mactiva" value="2">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+						</tr>
+                        
+                        <tr>
+                            <td>
+                                Referencia:&nbsp;
+                            </td>
+                            <td>
+                                <input type="text" name="nmodelo" size="15" class="buscar_n" maxlength="12" onclick="vaciar(this)" onchange="automarcado(this)">
+                            </td>
+                            <td><input type="checkbox" value="1" name="cnmodelo" class="clase_check_mini"></td>
+                        </tr>
+                        <tr>
+                        	<td>
+                                Descripción:&nbsp;
+                            </td>
+                            <td>
+                                <input type="text" name="descripcion" size="55" class="buscar_n" maxlength="42" onclick="vaciar(this)" onchange="automarcado(this)">
+                            </td>
+	                        <td><input type="checkbox" value="1" name="cdescripcion" class="clase_check_mini"></td>
+                        </tr>
+                        <tr>
+                        	<td>
+                                Observaciones:&nbsp;
+                            </td>
+                            <td>
+                                <input type="text" name="observaciones2" size="55" class="buscar_n" maxlength="42" onclick="vaciar(this)" onchange="automarcado(this)">
+                            </td>
+                            <td><input type="checkbox" value="1" name="cobservaciones2" class="clase_check_mini"></td>
+                        </tr>
+                        
+						<tr>
+                            <td valign="top">Familia:&nbsp;</td>
+                            
+                            <td colspan="2">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        
+                                            <td id="comp_familias_boton_1" class="pboton_2" onclick="fun_comp_familias(1)">&nbsp;PRINCIPAL&nbsp;</td>
+                                            
+                                            <td id="comp_familias_boton_2" class="pboton_2" onclick="fun_comp_familias(2)">&nbsp;DESCAL&nbsp;</td>
+                                            
+                                            <td id="comp_familias_boton_4" class="pboton_2" onclick="fun_comp_familias(4)">&nbsp;SECUNDARIOS&nbsp;</td>
+                                            
+                                            <td id="comp_familias_boton_3" class="pboton_2" onclick="fun_comp_familias(3)">&nbsp;LIBROS&nbsp;</td>
+                                            
+                                                </tr><tr>
+                                                
+                                            <td id="comp_familias_boton_5" class="pboton_2" onclick="fun_comp_familias(5)">&nbsp;KITS&nbsp;</td>
+                                            
+                                            <td id="comp_familias_boton_6" class="pboton_2" onclick="fun_comp_familias(6)">&nbsp;RECAMBIOS&nbsp;</td>
+                                            
+                                            <td id="comp_familias_boton_7" class="pboton_2" onclick="fun_comp_familias(7)">&nbsp;ACCESORIOS&nbsp;</td>
+                                            
+                                        <input type="hidden" name="comp_familias">
+                                    </tr>
+                                    <tr><td height="4"></td></tr>
+                                </tbody></table>
+                            </td>
+                        </tr>                    
+                    
+				</tbody></table>
+                </td>
+            </tr>
+				
+		
+
+	
+</tbody></table>
+
+
+	<div id="calendario" style="position:absolute;left:-100px;top:0px;visibility:hidden;z-index:20;">
+	<table class="ltabla" bgcolor="#FFFFFF" align="center" cellpadding="0" cellspacing="0" border="0">
+		<tbody><tr>
+			<td align="center"> <iframe width="180" height="173" id="frame_fecha" scrolling="no" frameborder="0"></iframe> </td>
+		</tr>
+	</tbody></table>
+	</div>
+	<iframe id="oculto" src="" width="0" height="0"></iframe>			
+<script>
+	
+	
+	function mesant(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "1")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "1";
+			document.getElementById(desde+'mesant').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-01-01";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-01-31";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function mesact(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "2")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "2";
+			document.getElementById(desde+'mesact').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-02-01";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-02-28";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	
+	
+	function hoy(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "3")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "3";
+			document.getElementById(desde+'hoy').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-02-24";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-02-24";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function manya(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "12")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "12";
+			document.getElementById(desde+'manya').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-02-25";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-02-25";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function ayer(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "4")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "4";
+			document.getElementById(desde+'ayer').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-02-23";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-02-23";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function sact(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "5")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "5";
+			document.getElementById(desde+'sact').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-02-23";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-03-01";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function sant(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "6")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "6";
+			document.getElementById(desde+'sant').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-02-16";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-02-22";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function sprox(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "13")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "13";
+			document.getElementById(desde+'sprox').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-03-02";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-03-08";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	
+	function f1t(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "7")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "7";
+			document.getElementById(desde+'f1t').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-01-01";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-03-31";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function f2t(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "8")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "8";
+			document.getElementById(desde+'f2t').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2025-04-01";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2025-06-30";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function f3t(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "9")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "9";
+			document.getElementById(desde+'f3t').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2025-07-01";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2025-09-30";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function f4t(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "10")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "10";
+			document.getElementById(desde+'f4t').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2025-10-01";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2025-12-31";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	
+	function mesprox(desde,cdesde,hasta,chasta)
+	{
+		if(document.getElementById(cdesde+'marca').value == "11")
+		{
+			desmarcar2(desde,cdesde);
+		}
+		else
+		{
+			desmarcar2(desde,cdesde);
+			document.getElementById(cdesde+'marca').value = "11";
+			document.getElementById(desde+'mesprox').style.backgroundColor = "#ffaaaa";
+			document.forms[0].elements[desde].value = "2026-03-01";
+			document.forms[0].elements[cdesde].checked = true;
+			document.forms[0].elements[hasta].value = "2026-03-31";
+			document.forms[0].elements[chasta].checked = true;
+		}
+	}
+	function desmarcar(desde,cdesde,hasta,chasta)
+	{
+		document.forms[0].elements[cdesde].checked = false;
+		document.forms[0].elements[chasta].checked = false;
+	
+		document.getElementById(cdesde+'marca').value = "";
+		desmarcar2(desde,cdesde)
+	
+	}
+	function desmarcar2(desde, cdesde)
+	{
+		document.getElementById(cdesde+'marca').value = "";
+		document.getElementById(desde+'ayer').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'hoy').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'manya').style.backgroundColor = "#aaaaff";
+		
+		document.getElementById(desde+'sant').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'sact').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'sprox').style.backgroundColor = "#aaaaff";
+	
+		document.getElementById(desde+'f1t').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'f2t').style.backgroundColor = "#aaaaff";
+	
+		document.getElementById(desde+'mesant').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'mesact').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'mesprox').style.backgroundColor = "#aaaaff";
+	
+		document.getElementById(desde+'f3t').style.backgroundColor = "#aaaaff";
+		document.getElementById(desde+'f4t').style.backgroundColor = "#aaaaff";
+	}
+</script>
+
+
+<script>
+function vaciar(campo)
+{
+	document.forms[campo.form.name].elements[campo.name].value = "";
+	document.forms[campo.form.name].elements["c"+campo.name].checked = false;
+}
+
+function automarcado(campo)
+{
+
+    if(document.forms[campo.form.name].elements[campo.name].value.length == 0)
+    {
+        document.forms[campo.form.name].elements["c"+campo.name].checked = false;
+    }
+    else
+    {
+        if(document.forms[campo.form.name].elements[campo.name].value == -1)
+        {
+            document.forms[campo.form.name].elements["c"+campo.name].checked = false;
+        }
+        else
+        {
+            document.forms[campo.form.name].elements["c"+campo.name].checked = true;
+        }
+    }
+}
+
+
+	function fun_tareas_tipo(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['tareas_tipo'].value.includes(cad))
+		{
+			document.getElementById('tareas_tipo_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['tareas_tipo'].value = document.forms[0].elements['tareas_tipo'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('tareas_tipo_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['tareas_tipo'].value = document.forms[0].elements['tareas_tipo'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_estado(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['estado'].value.includes(cad))
+		{
+			document.getElementById('estado_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['estado'].value = document.forms[0].elements['estado'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('estado_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['estado'].value = document.forms[0].elements['estado'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_reporte_v(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['reporte_v'].value.includes(cad))
+		{
+			document.getElementById('reporte_v_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['reporte_v'].value = document.forms[0].elements['reporte_v'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('reporte_v_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['reporte_v'].value = document.forms[0].elements['reporte_v'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_prioridad(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['prioridad'].value.includes(cad))
+		{
+			document.getElementById('prioridad_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['prioridad'].value = document.forms[0].elements['prioridad'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('prioridad_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['prioridad'].value = document.forms[0].elements['prioridad'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_tareas_reporte(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['tareas_reporte'].value.includes(cad))
+		{
+			document.getElementById('tareas_reporte_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['tareas_reporte'].value = document.forms[0].elements['tareas_reporte'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('tareas_reporte_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['tareas_reporte'].value = document.forms[0].elements['tareas_reporte'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_l_reactivadas(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['l_reactivadas'].value.includes(cad))
+		{
+			document.getElementById('l_reactivadas_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['l_reactivadas'].value = document.forms[0].elements['l_reactivadas'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('l_reactivadas_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['l_reactivadas'].value = document.forms[0].elements['l_reactivadas'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_comp_familias(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['comp_familias'].value.includes(cad))
+		{
+			document.getElementById('comp_familias_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['comp_familias'].value = document.forms[0].elements['comp_familias'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('comp_familias_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['comp_familias'].value = document.forms[0].elements['comp_familias'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_real(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['real'].value.includes(cad))
+		{
+			document.getElementById('real_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['real'].value = document.forms[0].elements['real'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('real_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['real'].value = document.forms[0].elements['real'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_tareas_origen(id)
+	{
+		cad = "_"+id+"_";
+		if(document.forms[0].elements['tareas_origen'].value.includes(cad))
+		{
+			document.getElementById('tareas_origen_boton_'+id).style.backgroundColor= "#aaaaff";
+			document.forms[0].elements['tareas_origen'].value = document.forms[0].elements['tareas_origen'].value.replace("_" + id + "_","");
+	
+		}
+		else
+		{
+			document.getElementById('tareas_origen_boton_'+id).style.backgroundColor= "#ffaaaa";
+			document.forms[0].elements['tareas_origen'].value = document.forms[0].elements['tareas_origen'].value + "_" + id + "_";
+		}
+	}
+	
+	function fun_solo_mactiva(id)
+	{
+		cad = "_"+id+"_";
+		doption3('mactiva');
+		
+		document.getElementById('mactiva_boton_'+id).style.backgroundColor= "#ffaaaa";
+		document.forms[0].elements['mactiva'].value = document.forms[0].elements['mactiva'].value + "_" + id + "_";
+	}
+	
+function doption3(nom_campo)
+{
+	var cont = 0;
+	while(cont<document.forms[0].elements['num_'+nom_campo].value)
+	{
+		document.getElementById(nom_campo+'_boton_'+cont).style.backgroundColor= "#aaaaff";
+		document.forms[0].elements[nom_campo].value = "";
+		cont = cont + 1;
+	}
+}
+
+function buscar(tipo)
+{
+	bloqueo();
+	if(tipo==0)
+	{
+		return true;
+	}
+	else
+	{
+		document.forms[0].submit();
+	}
+}
+function bloqueo()
+{
+	document.getElementById("bloqueo").style.visibility="visible";
+}
+
+function cal_tec()
+{
+	if(document.forms[0].elements["ccal_tec"].value == "1")
+	{
+		document.forms[0].elements["ccal_tec"].value = "0";
+		document.getElementById("bcal_tec").style.backgroundColor = "#aaaaff";
+	}
+	else
+	{
+		document.forms[0].elements["ccal_tec"].value = "1";
+		document.getElementById("bcal_tec").style.backgroundColor = "#ffaaaa";
+	}
+
+}
+function cal_com()
+{
+	if(document.forms[0].elements["ccal_com"].value == "1")
+	{
+		document.forms[0].elements["ccal_com"].value = "0";
+		document.getElementById("bcal_com").style.backgroundColor = "#aaaaff";
+	}
+	else
+	{
+		document.forms[0].elements["ccal_com"].value = "1";
+		document.getElementById("bcal_com").style.backgroundColor = "#ffaaaa";
+	}
+}
+
+</script>
+<div id="bloqueo" class="bloqueo_clase2">
+    <br><br><br>
+    <center>
+		<img src="../../iconos/process.gif" width="100">
+    </center>
+</div>
+
+
+
+<style>.cmenu_smi{	position:fixed;	visibility:visible;	left:-10;	top:-50;	opacity:100%;	z-index:29;}.cmenu2_smi{	overflow-y:scroll;		position:fixed;	visibility:visible;	left:-12000;	background-image:url(../../iconos/sombra4.png);	top:-5;	width:110%;	height:110%;	opacity:100%;	top:-5;	z-index:29;}.bloqueo_clase_fondo{	position:fixed;	visibility:visible;	background-image:url(../../../logos/logo_sinP.png);	width:100%;	height:100%;	right:0;	top:0;	z-index:-1;	opacity:0.05;}</style><div id="tmenu" class="cmenu_smi">	<table class="no_boton_6" bgcolor="#ffaaaa" onmouseover="mostrar_smi();">    	<tbody><tr>        	<td height="80" width="250" valign="bottom"><table cellpadding="0" cellspacing="0"><tbody><tr><td width="10"></td><td class="no_boton_1"><img src="../../iconos/menu_inicio.png" width="30"></td><td width="180" class="enlacesframe" align="left"><table cellpadding="0" cellspacing="0"><tbody><tr><td>&nbsp;</td><td><img src="../../iconos/smtareas.png" height="25"></td><td>&nbsp;</td><td><font size="2" color="#ffffff">&nbsp;Tareas Buscar</font></td></tr></tbody></table></td><td class="no_boton_1" bgcolor="#ffffff"><img src="../../../public/usuarios/foto202612989883.JPEG" width="30"></td></tr></tbody></table></td>        </tr>    </tbody></table></div><div id="tmenu2" class="cmenu2_smi">	<table cellpadding="0" cellspacing="0" height="150%">    	<tbody><tr><td valign="top">            <table class="filtro-box" bgcolor="#AAAAFF" height="150%" #ff0000="">                <tbody><tr>                    <td height="10" valign="top" width="200">                        <table>                            <tbody><tr><td height="10"></td></tr>                            <tr>                                <td width="5"></td>                                <td align="center" height="40" width="200">                                	<table class="no_no_boton_2" style="opacity;1" width="100%"><tbody><tr><td align="left" height="30" valign="top"><img src="../../../logos/logo_inicio.png" height="40"></td><td class="peque">GRUPO ENGLOBA 2000 SL</td></tr></tbody></table>                                </td>                                <td width="5"></td>                            </tr>                            <tr>                                <td width="5"></td>                                <td align="left" height="20" width="200"><font class="enlacesframe7">VICTOR GARCIA ROSAL</font></td>                                <td width="5"></td>                            </tr>                            <tr>                                <td width="5"></td>                                <td align="center" height="40" width="200">                                	<table><tbody><tr><td class="boton_3" onclick="inicio_smi()" bgcolor="#ffffff" align="center" height="40" width="100"><img src="../../iconos/umod.png" height="30"><br>Alta/Mod</td><td onclick="inicio_smi2()" class="boton_2" bgcolor="#ffffff" align="center" height="40" width="100"><img src="../../iconos/recientes.png" height="30"><br>Recientes</td></tr></tbody></table>                                </td>                                <td width="5"></td>                            </tr>                            <tr>                                <td width="5"></td>                                <td align="center" height="20" width="200" class="boton_1" onclick="inicio_smi3()" bgcolor="#ffffff">Pantalla Nueva</td>                                <td width="5"></td>                            </tr>                            <tr>                                <td width="5"></td>                                <td align="center" height="40" width="200" class="boton_1" onclick="smi_entrada()" bgcolor="#ffaaaa" valign="top"><table class="enlacesframe7"><tbody><tr><td>Entrada&nbsp;</td><td><img src="../../iconos/registro_entrada.png" height="30"></td></tr></tbody></table></td>                                <td width="5"></td>                            </tr><form action="../../clientes2/mod/lmodificar.asp?b=1" method="post" name="form_menu2" target="_blank"></form>                            <tr>                                <td width="5"></td>									<input type="hidden" name="ctodos_cli" value="1">                                <td align="center" height="40" width="200" class="enlacesframe7">Buscar<br><input class="buscar_0" size="15" type="text" name="todos_cli"> </td>                                <td width="5"></td>                            </tr><form action="" method="post" name="form_menu"></form>									<input type="hidden" name="rdir" value="">									<input type="hidden" name="chtr" value="83">                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(1,10,125)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smusuarios.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Usuarios</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_1" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('usuarios/mod/afmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('usuarios/alta/afalta.asp')">&nbsp;Nuevo Usuario</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('usuarios/accesos/afmodificar.asp')">&nbsp;Accesos</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('objetivos/mod/lmodificar.asp')">&nbsp;OBJETIVOS</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('centros/mod/fmodificar.asp')">&nbsp;Mapa Centros</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('almacenes/mod/falta.asp')">&nbsp;N.Almacen</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(2,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smclientes.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Clientes</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_2" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('clientes2/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('clientes2/alta/afalta.asp')">&nbsp;Nuevo Cliente</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('clientes2/imp_man/afmodificar.asp')">&nbsp;Importar</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('clientes2/cmp/fmodificar.asp')">&nbsp;Campanas</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(5,10,125)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smgest_com.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Eventos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_5" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('agenda/agenda/psemana.asp')">&nbsp;Agenda</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('agenda/listados/fmodificar.asp')">&nbsp;Listado Eventos</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('estadistica/agenda/fmodificar.asp')">&nbsp;Estadistica</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('agenda/pizarra/pdiario.asp')">&nbsp;QUINIELAS</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('agenda/agenda/dia.asp')">&nbsp;DIA HOY</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('inicio/inicio/inicio_eventos.asp')">&nbsp;Prevision Eventos</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" align="left" onclick="abrira_menu_smi('agenda/prop/pinicio2.asp')">&nbsp;Mi Agenda</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(6,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smtareas.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Tareas/Avisos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_6" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('tareas/mod/afmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" align="left" onclick="abrira_menu_smi('tareas/alta/falta.asp')">&nbsp;Nueva Aviso</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('inicio/inicio/prev.asp')">&nbsp;Previsiones</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" align="left" onclick="abrira_menu_smi('tareas/prop/pinicio2.asp?prop=1')">&nbsp;Mis Tareas</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" align="left" onclick="abrira_menu_smi('tareas/mod/dia.asp')">&nbsp;Planificación</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('tareas/prop/pinicio2.asp')">&nbsp;Calendario Tareas</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(8,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smproductos.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Productos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_8" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('articulos/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('articulos/alta/falta.asp')">&nbsp;N.Prod</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('almacenes/mod/fmodificar.asp')">&nbsp;STOCK Almacenes</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('articulos/traspasos/atj.asp')">&nbsp;N.Traspaso</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('articulos/entradas/atj.asp')">&nbsp;Entradas Alm.</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" align="left" onclick="abrira_menu_smi('mov_almacen/mod/fmodificar.asp')">&nbsp;Mov.Almacen</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(21,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smcontratos.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Contratos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_21" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('contratos/mod/afmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" align="left" onclick="abrira_menu_smi('contratos/alta/afalta.asp')">&nbsp;Nuevo Contrato</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(11,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smpedidos.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Pedidos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_11" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pedidos/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('comisiones/mod/afmodificar.asp')">&nbsp;Comisiones</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('comisiones/fact/afmodificar.asp')">&nbsp;Fact.Com</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pedidos/mod/afmodificar_cobrados.asp')">&nbsp;Cobrados</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('estadistica/pedidos/fmodificar.asp')">&nbsp;Estadistica</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(12,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smalbaranes.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Albaranes</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_12" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('albaranes/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(13,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smfacturas.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Facturas</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_13" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('facturas/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('inicio/inicio/inicio_arqueo.asp')">&nbsp;Arqueo</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('facturas/iva/fmodificar.asp')">&nbsp;Prev.IVA</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('remesas/sii/fmodificar.asp')">&nbsp;Gest SII</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('facturas_proforma/mod/fmodificar.asp')">&nbsp;Proforma</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('estadistica/facturas/fmodificar.asp')">&nbsp;Estadistica</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(26,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smmaquinas.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Maquinas</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_26" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('maquinas/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('maquinas/alta/falta.asp')">&nbsp;Nueva Maquina</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(14,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smpagos.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Pagos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_14" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pagos/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('remesas/mod/fmodificar.asp')">&nbsp;Remesas</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pagos/mod/importar.asp')">&nbsp;Imp.Impagados</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pagos/informes/fmodificar.asp')">&nbsp;Informes</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(28,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smgastos.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Gastos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_28" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('gastos/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('gastos/alta/falta.asp')">&nbsp;Nuevo Gasto</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(16,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smrepositorio.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Biblioteca</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_16" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('repositorio/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(17,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smcampanas.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Campañas</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_17" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('cmp/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('cmp/alta/afalta.asp')">&nbsp;Nueva Campama</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('plantilla/email/plantilla_email.asp')">&nbsp;Plantillas Email</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(20,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smconfiguracion.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Configuración</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_20" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('configuracion/configuracion/afmodificar.asp')">&nbsp;Parametros</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(22,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smprov_pedidos.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Prov Pedidos</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_22" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pro_pedidos/alta/fmodificar.asp')">&nbsp;Nuevo Pedido</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pro_pedidos/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(24,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smprov_albaranes.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Prov Albaranes</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_24" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pro_albaranes/alta/fmodificar.asp')">&nbsp;Nuevo Albaran</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pro_albaranes/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                                        <tr>                                            <td width="5"></td>                                            <td width="100%" valign="top" onmouseover="javascript:clientes_smi(25,10,120)">	                                                <table id="tcli" cellpadding="0" cellspacing="0" width="100%">                                                    <tbody><tr><td align="center"><a class="enlacesframe"><img src="../../iconos/smprov_facturas.png" height="40"></a></td></tr>                                                    <tr><td align="center"><a class="enlacesframe9">Prov Facturas</a></td></tr>                                                    <tr><td align="center" height="10"><hr style="border: none; height: 1px; background-color:#cccccc;"></td></tr>                                                </tbody></table>                                            </td>                                            <td width="300">&nbsp;</td>                                            <td valign="top">                                                    <div id="opcion_25" style="position:absolute;display:none;">                                                        <table cellpadding="0" cellspacing="0" width="300" height="500" valign="top">                                                            <tbody><tr><td align="left" valign="top">                                                                <table cellpadding="0" cellspacing="0" border="0" height="56">                                                                <tbody><tr><td height="1"></td></tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pro_facturas/alta/fmodificar.asp')">&nbsp;Nueva Factura</td>                                                                            </tr>                                                                            <tr>                                                                                <td width="200" height="30" class="filtro-box2" bgcolor="#ffffff" align="left" onclick="ira_menu_smi('pro_facturas/mod/fmodificar.asp')">&nbsp;Consulta</td>                                                                            </tr>                                                                <tr><td height="100%"></td></tr>                                                                </tbody></table>                                                            </td></tr>                                                        </tbody></table>                                                    </div>											</td>                                        </tr>                            <tr>                                <td width="5"></td>                                <td align="center" height="65" width="200" class="boton_1" bgcolor="#c10000" onclick="salir_smi()"><img src="../../iconos/salir2.png" width="50'"></td>                                <td width="5"></td>                            </tr>                        </tbody></table>                    </td>                </tr>            </tbody></table>		</td>    	<td valign="top" width="100"></td>    	<td valign="top" width="500" onmouseover="nomostrar_smi();"></td>	</tr>    </tbody></table></div><script>function mostrar_smi(){	document.getElementById('tmenu').style.visibility='hidden';	document.getElementById('tmenu2').style.top = -10;	document.getElementById('tmenu2').style.left = -5;	document.getElementById('tmenu2').style.visibility='visible';}function nomostrar_smi(){	document.getElementById('tmenu').style.left = -10;	document.getElementById('tmenu2').style.left = -12000;	document.getElementById('tmenu').style.visibility='visible';}function clientes_smi(primera,izquierda,ancho){	var alto = 28;	parent_menu_smi(primera,izquierda);}function parent_menu_smi(opcion,ancho){	elimina_smi();	opciones_smi('opcion_'+opcion,ancho);}function elimina_smi(){			document.getElementById('opcion_1').style.display = 'none';			document.getElementById('opcion_1').style.display = 'none';			document.getElementById('opcion_1').style.display = 'none';			document.getElementById('opcion_1').style.display = 'none';			document.getElementById('opcion_2').style.display = 'none';			document.getElementById('opcion_2').style.display = 'none';			document.getElementById('opcion_2').style.display = 'none';			document.getElementById('opcion_5').style.display = 'none';			document.getElementById('opcion_5').style.display = 'none';			document.getElementById('opcion_5').style.display = 'none';			document.getElementById('opcion_5').style.display = 'none';			document.getElementById('opcion_6').style.display = 'none';			document.getElementById('opcion_6').style.display = 'none';			document.getElementById('opcion_6').style.display = 'none';			document.getElementById('opcion_8').style.display = 'none';			document.getElementById('opcion_11').style.display = 'none';			document.getElementById('opcion_12').style.display = 'none';			document.getElementById('opcion_13').style.display = 'none';			document.getElementById('opcion_14').style.display = 'none';			document.getElementById('opcion_16').style.display = 'none';			document.getElementById('opcion_17').style.display = 'none';			document.getElementById('opcion_17').style.display = 'none';			document.getElementById('opcion_20').style.display = 'none';			document.getElementById('opcion_20').style.display = 'none';			document.getElementById('opcion_20').style.display = 'none';			document.getElementById('opcion_21').style.display = 'none';			document.getElementById('opcion_21').style.display = 'none';			document.getElementById('opcion_22').style.display = 'none';			document.getElementById('opcion_22').style.display = 'none';			document.getElementById('opcion_24').style.display = 'none';			document.getElementById('opcion_24').style.display = 'none';			document.getElementById('opcion_25').style.display = 'none';			document.getElementById('opcion_26').style.display = 'none';			document.getElementById('opcion_26').style.display = 'none';			document.getElementById('opcion_14').style.display = 'none';			document.getElementById('opcion_25').style.display = 'none';			document.getElementById('opcion_11').style.display = 'none';			document.getElementById('opcion_11').style.display = 'none';			document.getElementById('opcion_11').style.display = 'none';			document.getElementById('opcion_13').style.display = 'none';			document.getElementById('opcion_13').style.display = 'none';			document.getElementById('opcion_8').style.display = 'none';			document.getElementById('opcion_2').style.display = 'none';			document.getElementById('opcion_13').style.display = 'none';			document.getElementById('opcion_13').style.display = 'none';			document.getElementById('opcion_1').style.display = 'none';			document.getElementById('opcion_1').style.display = 'none';			document.getElementById('opcion_14').style.display = 'none';			document.getElementById('opcion_8').style.display = 'none';			document.getElementById('opcion_5').style.display = 'none';			document.getElementById('opcion_14').style.display = 'none';			document.getElementById('opcion_8').style.display = 'none';			document.getElementById('opcion_8').style.display = 'none';			document.getElementById('opcion_8').style.display = 'none';			document.getElementById('opcion_5').style.display = 'none';			document.getElementById('opcion_6').style.display = 'none';			document.getElementById('opcion_17').style.display = 'none';			document.getElementById('opcion_28').style.display = 'none';			document.getElementById('opcion_28').style.display = 'none';			document.getElementById('opcion_11').style.display = 'none';			document.getElementById('opcion_13').style.display = 'none';			document.getElementById('opcion_5').style.display = 'none';			document.getElementById('opcion_6').style.display = 'none';			document.getElementById('opcion_6').style.display = 'none';}function opciones_smi(opcion, ancho){	document.getElementById(opcion).style.display = 'inline';}function ira_menu_smi(url){	document.forms['form_menu'].elements['rdir'].value = '../../'+url;	document.forms['form_menu'].action = '../../rdir/rdir/';	document.forms['form_menu'].submit();}function abrira_menu_smi(url){	document.forms['form_menu'].elements['rdir'].value = '../../'+url;	document.forms['form_menu'].action = '../../rdir/rdir/';	document.forms['form_menu'].target = '_blank';	document.forms['form_menu'].submit();	document.forms['form_menu'].target = '_self';}function inicio_smi(){	document.forms['form_menu'].action = '../../inicio/recientes/inicio.asp';	document.forms['form_menu'].submit();}function inicio_smi2(){	document.forms['form_menu'].action = '../../inicio/recientes/recientes.asp';	document.forms['form_menu'].submit();}function inicio_smi3(){	window.open('../../inicio/recientes/recientes.asp');}function salir_smi(){	document.forms['form_menu'].action = './../../default.asp';	document.forms['form_menu'].submit();}function buscar_vmenu(){	return true;}function smi_entrada(){	document.forms['form_menu'].action = '../../usuarios/laboral/entrada.asp';	document.forms['form_menu'].submit();}</script><iframe name="menu_iframe" src="../../ac_sesion.asp" width="0" height="0" frameborder="0"></iframe><div id="bloqueo_2" class="bloqueo_clase_fondo"></div>
+
+<div id="btn_opciones" style="position: fixed; right: 0.5rem; top: -0.2rem; z-index: 20;display: block;">
+    <table onclick="buscar(1);" class="boton_2"><tbody><tr><td><img height="35" src="../../iconos/buscar3.png"></td><td></td><td>Buscar&nbsp;</td></tr></tbody></table>
+</div></body></html>

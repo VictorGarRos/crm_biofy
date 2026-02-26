@@ -10,6 +10,7 @@ interface MetricCardProps {
     color: string;
     className?: string;
     loading?: boolean;
+    hideFooter?: boolean;
 }
 
 export function MetricCard({
@@ -19,10 +20,11 @@ export function MetricCard({
     icon: Icon,
     color,
     className,
-    loading = false
+    loading = false,
+    hideFooter = false
 }: MetricCardProps) {
     return (
-        <div className={cn("biofy-card p-6 flex flex-col justify-between min-h-[160px]", className)}>
+        <div className={cn("biofy-card p-6 flex flex-col justify-between min-h-[160px] bg-slate-50/50 border border-slate-100 group transition-all duration-300 hover:shadow-md hover:-translate-y-1", className)}>
             <div className="flex items-start justify-between">
                 <div>
                     <p className="text-muted-foreground text-sm font-medium mb-1">{label}</p>
@@ -30,7 +32,7 @@ export function MetricCard({
                         <div className="h-8 w-24 bg-slate-200 animate-pulse rounded my-1" />
                     ) : (
                         <div className="flex items-center gap-3">
-                            <h3 className="text-3xl font-bold tracking-tight">{value}</h3>
+                            <h3 className="text-3xl font-bold tracking-tight text-slate-800">{value}</h3>
                             {change !== undefined && (
                                 <span className={cn(
                                     "text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-0.5",
@@ -46,7 +48,7 @@ export function MetricCard({
                     <Icon className="w-5 h-5 text-slate-800" />
                 </div>
             </div>
-            <p className="text-[11px] text-muted-foreground mt-4">This month</p>
+            {!hideFooter && <p className="text-[11px] text-muted-foreground mt-4">This month</p>}
         </div>
     );
 }

@@ -1,38 +1,21 @@
 import { NextResponse } from 'next/server';
 import { scrapeCRMData } from '@/lib/scraper';
+import fs from 'fs';
+import path from 'path';
 
-export async function POST(request: Request) {
+export async function GET() {
     try {
-        const body = await request.json();
-        const { username, password } = body;
-
-        if (!username || !password) {
-            return NextResponse.json(
-                { error: 'Username and password are required' },
-                { status: 400 }
-            );
+        console.log("Starting forced API scrape...");
+        const result = await scrapeCRMData('VICTOR', 'VICTOR');
+        
+        if (result.success && result.data) {
+            const dataPath = path.join(process.cwd(), 'public', 'crm_data.json');
+            fs.writeFileSync(dataPath, JSON.stringify(result.data, null, 2));
+            return NextResponse.json({ success: true, message: "Data scraped and saved successfully." });
+        } else {
+            return NextResponse.json({ success: false, error: result.error }, { status: 500 });
         }
-
-        // Trigger the scraper
-        const result = await scrapeCRMData(username, password);
-
-        if (!result.success) {
-            return NextResponse.json(
-                { error: result.error },
-                { status: 500 }
-            );
-        }
-
-        return NextResponse.json({
-            message: 'Scraping successful',
-            data: result.data
-        });
-
-    } catch (error) {
-        console.error('API Error:', error);
-        return NextResponse.json(
-            { error: 'Internal Server Error' },
-            { status: 500 }
-        );
+    } catch (e: any) {
+        return NextResponse.json({ success: false, error: e.message }, { status: 500 });
     }
 }
