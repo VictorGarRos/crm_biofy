@@ -47,8 +47,15 @@ export function useCRMData() {
                 const pedidos = jsonData.pedidos || [];
                 const usuarios = jsonData.usuarios || [];
 
-                // DATOS ENTREGADOS = Todos los eventos asignados
-                const entregados = eventos.length;
+                // Filtrar posibles cabeceras o filas sin fecha para evitar conteos inflados
+                const eventosValidos = eventos.filter((r: string) => /\d{2}\/\d{2}\/\d{4}/.test(r));
+
+                // Backup logic: if no tareas are scraped yet, teleoperadora data fallback from eventos.
+                const tareas = jsonData.tareas || [];
+                const tareasValidas = (tareas as string[]).filter((r: string) => /\d{2}\/\d{2}\/\d{4}/.test(r));
+
+                // DATOS ENTREGADOS = Todos los eventos asignados válidos
+                const entregados = eventosValidos.length;
 
                 // CONFIRMADOS = Eventos con estado CONFIRMADO
                 const confirmados = eventos.filter((r: string) => r.includes('CONFIRMADO')).length;
@@ -132,9 +139,9 @@ export function useCRMData() {
                         cuentas: Array.from(uniqueCuentas).sort()
                     },
                     raw: {
-                        eventos: jsonData.eventos,
+                        eventos: eventosValidos,
                         pedidos: jsonData.pedidos,
-                        tareas: jsonData.tareas, // Added 'tareas' here
+                        tareas: tareasValidas,
                         usuarios: jsonData.usuarios
                     },
                     lastUpdate: new Date().toISOString()

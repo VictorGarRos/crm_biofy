@@ -52,17 +52,31 @@ export default function DashboardPage() {
     const isMatchComercial = (row: string) => {
       const normalizedRow = row.replace(/[\s\t\n\r]+/g, ' ').trim().toUpperCase();
 
+      const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      const matchByUser = (userName: string) => {
+        const uObj = data.raw.usuarios?.find((u: any) => u.nombre === userName);
+        if (uObj && uObj.login && new RegExp(`\\b${escapeRegExp(uObj.login.toUpperCase())}\\b`).test(normalizedRow)) return true;
+        return new RegExp(`\\b${escapeRegExp(userName.toUpperCase())}\\b`).test(normalizedRow);
+      };
+
+      // Disallow tecnico events when in comercial mode (whatever the filter selection)
+      if (dashboardMode === 'COMERCIAL' && data.filters?.tecnicos) {
+        for (const tecnicoName of data.filters.tecnicos) {
+          const tObj = data.raw.usuarios?.find((u: any) => u.nombre === tecnicoName);
+          if (tObj && tObj.login && new RegExp(`\\b${escapeRegExp(tObj.login.toUpperCase())}\\b`).test(normalizedRow)) return false;
+          if (new RegExp(`\\b${escapeRegExp(tecnicoName.toUpperCase())}\\b`).test(normalizedRow)) return false;
+        }
+      }
+
+
       if (!appliedFilters.comercial) {
         // Ensure we only count events for the allowed users of the current mode
         const allowedUsers = dashboardMode === 'COMERCIAL' ? data.filters?.comerciales : (dashboardMode === 'TELEOPERADORA' ? data.filters?.teleoperadoras : data.filters?.tecnicos);
         if (!allowedUsers || allowedUsers.length === 0) return true;
 
-        // Find if this row belongs to any of the allowed users
         for (const userName of allowedUsers) {
-          const upperName = userName.toUpperCase();
-          const uObj = data.raw.usuarios?.find((u: any) => u.nombre === userName);
-          if (uObj && uObj.login && new RegExp(`\\b${uObj.login.toUpperCase()}\\b`).test(normalizedRow)) return true;
-          if (normalizedRow.includes(upperName)) return true;
+          if (matchByUser(userName)) return true;
         }
         return false;
       }
@@ -78,10 +92,22 @@ export default function DashboardPage() {
     };
 
     const isMatchTipo = (row: string) => {
-      if (!appliedFilters.tipo) return true;
+      const rowUpper = row.toUpperCase();
+
+      // Default behavior when no type filter is selected: prioritize mode-specific event sets
+      if (!appliedFilters.tipo) {
+        if (dashboardMode === 'COMERCIAL') {
+          const allowed = ['VISITA', 'ENTREGA', 'RECOGIDA', 'VENTA', 'DATOS ENTREGADOS'];
+          return allowed.some(t => rowUpper.includes(t));
+        }
+        if (dashboardMode === 'TECNICO') {
+          const allowed = ['INSTALACION', 'MANTENIMIENTO', 'INCIDENCIA'];
+          return allowed.some(t => rowUpper.includes(t));
+        }
+        return true;
+      }
 
       if (dashboardMode === 'TELEOPERADORA') {
-        const rowUpper = row.toUpperCase();
         if (appliedFilters.tipo === 'Lead Digital') {
           return rowUpper.includes('LEAD DIGITAL') || rowUpper.includes('CP') || rowUpper.includes('POTENCIAL');
         } else if (appliedFilters.tipo === 'Llamada') {
@@ -90,7 +116,7 @@ export default function DashboardPage() {
         }
       }
 
-      return row.includes(appliedFilters.tipo);
+      return rowUpper.includes(appliedFilters.tipo.toUpperCase());
     };
 
     const isMatchCuenta = (row: string) => {
@@ -126,7 +152,7 @@ export default function DashboardPage() {
 
       // Dates usually appear in the 1st or 2nd field of the row separated by \t, e.g. "02/02/2026 8:30:00"
       const dateMatch = row.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-      if (!dateMatch) return true;
+      if (!dateMatch) return false; // Exclude header / malformed rows when date filter is active
 
       const day = parseInt(dateMatch[1]);
       const month = parseInt(dateMatch[2]) - 1; // 0-indexed

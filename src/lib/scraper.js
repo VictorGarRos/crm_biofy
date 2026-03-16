@@ -124,6 +124,71 @@ function scrapeCRMData(username, password) {
                 const rows = Array.from(document.querySelectorAll('tr'));
                 return rows.filter(r => r.innerText.includes('PENDIENTE') || r.innerText.includes('CONFIRMADO') || r.cells.length > 5).map(r => r.innerText);
             });
+
+            // 3.5. Scrape Tareas by 'Fecha Alta Tarea'
+            console.log('Scraping Tareas (Read-Only)...');
+            yield page.goto('https://engloba.crmsmi.com/sm/tareas/mod/fmodificar.asp', { waitUntil: 'networkidle2' });
+            yield page.evaluate((start, end) => {
+                const ffdesde = document.querySelector('input[name="ffdesde"]');
+                if (ffdesde)
+                    ffdesde.value = start;
+                const ffhasta = document.querySelector('input[name="ffhasta"]');
+                if (ffhasta)
+                    ffhasta.value = end;
+                const ddesde = document.querySelector('input[name="ddesde"]');
+                if (ddesde)
+                    ddesde.checked = true;
+                const hhasta = document.querySelector('input[name="hhasta"]');
+                if (hhasta)
+                    hhasta.checked = true;
+                const equipo = document.querySelector('select[name="equipo"]');
+                if (equipo)
+                    equipo.value = "6";
+                const cequipo = document.querySelector('input[name="cequipo"]');
+                if (cequipo)
+                    cequipo.checked = true;
+                const fdesde = document.querySelector('input[name="fdesde"]');
+                if (fdesde)
+                    fdesde.value = "";
+                let n_reg = document.querySelector('input[name="n_reg"]');
+                if (!n_reg && document.forms.length > 0) {
+                    n_reg = document.createElement('input');
+                    n_reg.type = 'hidden';
+                    n_reg.name = 'n_reg';
+                    document.forms[0].appendChild(n_reg);
+                }
+                if (n_reg)
+                    n_reg.value = "10000";
+                let bdatos = document.querySelector('input[name="bdatos"]');
+                if (!bdatos && document.forms.length > 0) {
+                    bdatos = document.createElement('input');
+                    bdatos.type = 'hidden';
+                    bdatos.name = 'bdatos';
+                    document.forms[0].appendChild(bdatos);
+                }
+                if (bdatos)
+                    bdatos.value = "10000";
+                if (document.forms.namedItem('btareas')) {
+                    document.forms.namedItem('btareas').submit();
+                }
+                else if (typeof window.buscar === 'function') {
+                    window.buscar(0);
+                }
+                else {
+                    const btn = document.querySelector('input[type="submit"][value="Buscar"]');
+                    if (btn)
+                        btn.click();
+                    else if (document.forms.length > 0)
+                        document.forms[0].submit();
+                }
+            }, formatDate(startOfMonth), formatDate(today));
+            yield page.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => {});
+            yield new Promise(r => setTimeout(r, 3000));
+            const tareas = yield page.evaluate(() => {
+                const rows = Array.from(document.querySelectorAll('tr'));
+                return rows.filter(r => r.cells.length > 5 && r.innerText.trim().length > 10).map(r => r.innerText);
+            });
+
             // 4. Scrape Usuarios
             console.log('Scraping Usuarios (Read-Only)...');
             // Let's go to the main user list page instead of the search page that might not exist or require different params
@@ -159,12 +224,13 @@ function scrapeCRMData(username, password) {
                     return { login, nombre, tipo, rawRow, cells };
                 }).filter(u => u.nombre !== '' && !u.nombre.includes('Nombre') && u.cells.length > 2);
             });
-            console.log(`Scraped ${eventos.length} potential events, ${pedidos.length} potential orders, and ${usuarios.length} users.`);
+            console.log(`Scraped ${eventos.length} potential events, ${pedidos.length} potential orders, ${tareas.length} tareas, and ${usuarios.length} users.`);
             return {
                 success: true,
                 data: {
                     eventos: eventos,
                     pedidos: pedidos,
+                    tareas: tareas,
                     usuarios: usuarios,
                     timestamp: new Date().toISOString()
                 }

@@ -28,12 +28,12 @@ async function runScraper() {
     }
 }
 
-// Schedule task to run every 6 hours (at minute 0)
-// '0 */6 * * *' -> At minute 0 past hour 0, 6, 12, 18.
-cron.schedule('0 */6 * * *', runScraper);
+// Schedule task to run every hour (at minute 0)
+// '0 * * * *' -> At minute 0 past every hour.
+cron.schedule('0 * * * *', runScraper);
 
 console.log('CRM Scraper Scheduler started.');
-console.log('Task scheduled for every 6 hours (0 */6 * * *).');
+console.log('Task scheduled for every hour (0 * * * *).');
 
 // Run immediately on start
 runScraper();
