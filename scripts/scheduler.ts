@@ -28,12 +28,12 @@ async function runScraper() {
     }
 }
 
-// Schedule task to run every hour (at minute 0)
-// '0 * * * *' -> At minute 0 past every hour.
-cron.schedule('0 * * * *', runScraper);
+// Schedule task to run once per day at 23:00 (Hobby Vercel compatible)
+// '0 23 * * *' -> At 23:00 every day.
+cron.schedule('0 23 * * *', runScraper);
 
 console.log('CRM Scraper Scheduler started.');
-console.log('Task scheduled for every hour (0 * * * *).');
+console.log('Task scheduled for once per day at 23:00 (0 23 * * *).');
 
 // Run immediately on start
 runScraper();
